@@ -1,6 +1,10 @@
 classes = new Meteor.Collection("classes");
 
 if (Meteor.isClient) {
+  Accounts.ui.config({
+    passwordSignupFields: 'USERNAME_ONLY'
+  });
+
   Meteor.subscribe('userData');
   Meteor.subscribe('classes');
   
