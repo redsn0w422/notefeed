@@ -27,9 +27,9 @@ if (Meteor.isClient) {
   Meteor.subscribe('classes');
   
   Meteor.startup(function () {
-    $("#newClassForm").hide();
-    $("#browseClassesDiv").hide();
-    $("#userProfile").hide();
+    // $("#newClassForm").hide();
+    // $("#browseClassesDiv").hide();
+    // $("#userProfile").hide();
   });
 
   // Template.menubar.events({
