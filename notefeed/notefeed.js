@@ -43,7 +43,7 @@ if (Meteor.isClient) {
       $("#browseClassesDiv").show();
       $("#userProfile").hide();
 
-    }
+    },
     'click #meLink' : function () {
       $("#userProfile").show();
       $("#browseClassesDiv").hide();
