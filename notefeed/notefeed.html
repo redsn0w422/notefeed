@@ -7,9 +7,28 @@
 
 	<a href="#" id="homeLink">home</a>
 	<a href="#" id="meLink">me</a>
+	<a href="#" id="newClass">new class</a>
 
 	{{> hello}}
+
+	<div id="newClassForm">
+		name: 
+		<input type="text" id="newClass_name" placeholder="name" />
+		<br/>
+		start date:
+		<input type="text" id="newClass_startDate" placeholder="MM/DD/YY" />
+		<br/>
+		end date:
+		<input type="text" id="newClass_endDate" placeholder="MM/DD/YY" />
+		<br/>
+		upload frequency:
+		<input type="text" id="newClass_freq" placeholder="weekly, daily, monthly, etc." />
+		<br/>
+	</div>
+
 </body>
+
+
 
 <template name="hello">
 	<div id="ohno">
