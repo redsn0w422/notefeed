@@ -4,6 +4,13 @@ if (Meteor.isClient) {
   Meteor.subscribe('userData');
   Meteor.subscribe('classes');
 
+  var meButton = document.getElementById("meLink");
+
+  meButton.onclick = function() {
+            $("#ohno").load("test.html");
+            return false;
+          };
+
   Template.hello.greeting = function () {
     return "Welcome to notefeed.";
   };
