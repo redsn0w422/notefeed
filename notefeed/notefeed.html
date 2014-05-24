@@ -74,7 +74,7 @@
 	{{#each classes}}
 		<div class="btn-group">
 			<button class="btn btn-default" type="button">{{name}} by {{user}} (rating: {{rating}})</button>
-			<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type-"button">
+			<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
 				<span class="caret"></span>
     				<span class="sr-only">Toggle Dropdown</span>
 			</button>
@@ -87,7 +87,8 @@
 		
 	{{/each}}
 </template>
-<template>
+
+<template name="viewClassModal">
 	<div class="modal fade" id="viewClassModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
@@ -106,6 +107,7 @@
 	  </div>
 	</div>
 </template>
+
 <template name="userProfile">
 	<div class="modal fade" id="meModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
