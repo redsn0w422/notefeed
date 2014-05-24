@@ -65,7 +65,7 @@ if (Meteor.isClient) {
 
       Meteor.call('addClass', name, user, keywords, startDate, endDate, freq);
       
-      //$("#newClass_modal_body").val("Class creation successful!");
+      $("#newClass_modal_body").val("Class creation successful!");
     }
   });
 
@@ -100,7 +100,7 @@ if (Meteor.isClient) {
     }
   };
 
-  // Template.classPage.
+  Template.classPage.
 }
 
 if (Meteor.isServer) {
