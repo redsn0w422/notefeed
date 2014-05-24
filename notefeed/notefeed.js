@@ -5,7 +5,7 @@ if (Meteor.isClient) {
   Meteor.subscribe('classes');
   
   Meteor.startup(function () {
-    $("#ohno").hide();
+    $("#newClassForm").hide();
   });
 
   Template.hello.events({
@@ -15,6 +15,12 @@ if (Meteor.isClient) {
       $("#ohno").show();
     }
   });
+
+  Template.menubar.events({
+    'click #newClass' : function () {
+      $("#newClassForm").show();
+    }
+  })
 
   Template.newClass.events({
     'click #newClass_submit' : function () {

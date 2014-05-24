@@ -3,13 +3,8 @@
 </head>
 
 <body>
-	{{> loginButtons}}
 
-	<a href="#" id="homeLink">home</a>
-	<a href="#" id="meLink">me</a>
-	<a href="#" id="newClass">new class</a>
-
-	{{> hello}}
+	{{> menubar}}
 
 	<div id="newClassForm">
 		{{> newClass}}	
@@ -17,7 +12,15 @@
 
 </body>
 
+<template name="menubar">
+	{{> loginButtons}}
 
+	<a href="#" id="homeLink">home</a>
+	<a href="#" id="meLink">me</a>
+	<a href="#" id="newClass">new class</a>
+
+	{{> hello}}
+</template>
 
 <template name="hello">
 	<div id="ohno">
