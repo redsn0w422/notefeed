@@ -12,19 +12,7 @@
 	{{> hello}}
 
 	<div id="newClassForm">
-		name: 
-		<input type="text" id="newClass_name" placeholder="name" />
-		<br/>
-		start date:
-		<input type="text" id="newClass_startDate" placeholder="MM/DD/YY" />
-		<br/>
-		end date:
-		<input type="text" id="newClass_endDate" placeholder="MM/DD/YY" />
-		<br/>
-		upload frequency:
-		<input type="text" id="newClass_freq" placeholder="weekly, daily, monthly, etc." />
-		<br/>
-		<input type="button" id="newClass_submit" value="new class" />
+		{{> newClass}}	
 	</div>
 
 </body>
@@ -40,4 +28,20 @@
 
 <template name="class">
 	<h1>this is a class</h1>
+</template>
+
+<template name="newClass">
+	name: 
+	<input type="text" id="newClass_name" placeholder="name" />
+	<br/>
+	start date:
+	<input type="text" id="newClass_startDate" placeholder="MM/DD/YY" />
+	<br/>
+	end date:
+	<input type="text" id="newClass_endDate" placeholder="MM/DD/YY" />
+	<br/>
+	upload frequency:
+	<input type="text" id="newClass_freq" placeholder="weekly, daily, monthly, etc." />
+	<br/>
+	<input type="button" id="newClass_submit" value="new class" />
 </template>
