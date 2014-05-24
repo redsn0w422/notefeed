@@ -32,25 +32,25 @@ if (Meteor.isClient) {
     $("#userProfile").hide();
   });
 
-  Template.menubar.events({
-    'click #newClass' : function () {
-      $("#newClassForm").show();
-      $("#browseClassesDiv").hide();
-      $("#userProfile").hide();
+  // Template.menubar.events({
+  //   'click #newClass' : function () {
+  //     $("#newClassForm").show();
+  //     $("#browseClassesDiv").hide();
+  //     $("#userProfile").hide();
 
-    },
-    'click #browseClasses' : function () {
-      $("#newClassForm").hide();
-      $("#browseClassesDiv").show();
-      $("#userProfile").hide();
+  //   },
+  //   'click #browseClasses' : function () {
+  //     $("#newClassForm").hide();
+  //     $("#browseClassesDiv").show();
+  //     $("#userProfile").hide();
 
-    },
-    'click #meLink' : function () {
-      $("#userProfile").show();
-      $("#browseClassesDiv").hide();
-      $("#newClassForm").hide();
-    }
-  });
+  //   },
+  //   'click #meLink' : function () {
+  //     $("#userProfile").show();
+  //     $("#browseClassesDiv").hide();
+  //     $("#newClassForm").hide();
+  //   }
+  // });
 
   Template.newClass.events({
     'click #newClass_submit' : function () {
