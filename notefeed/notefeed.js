@@ -1,5 +1,7 @@
 classes = new Meteor.Collection("classes");
 
+$("#ohno").hide();
+
 if (Meteor.isClient) {
   Meteor.subscribe('userData');
   Meteor.subscribe('classes');
@@ -7,7 +9,7 @@ if (Meteor.isClient) {
   var meButton = document.getElementById("meLink");
 
   meButton.onclick = function() {
-            $("#ohno").load("test.html");
+            $("#ohno").show();
             return false;
           };
 
