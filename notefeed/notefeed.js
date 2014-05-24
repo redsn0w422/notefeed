@@ -60,6 +60,8 @@ if (Meteor.isClient) {
       var endDate = $("#newClass_endDate").val();
       var freq = $("#newClass_freq").val();
 
+      console.log("called new class submit");
+
       Meteor.call('addClass', name, user, startDate, endDate, freq);
     }
   });

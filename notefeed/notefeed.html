@@ -1,9 +1,7 @@
 <head>
 	<title>notefeed</title>
 </head>
-
 <body>
-
 	{{> menubar}}
 
 	<div id="newClassForm">
@@ -21,47 +19,77 @@
 </body>
 
 <template name="menubar">
-	{{> loginButtons}}
-
-	<a href="#" id="homeLink">home</a>
-	<a href="#" id="meLink">me</a>
-	<a href="#" id="newClass">new class</a>
-	<a href="#" id="browseClasses">browse classes</a>
-
-</template>
-
-<template name="userProfile">
-	<h1>welcome, {{username}}!</h1>
-	<br/>
-	classes you own:
-	{{#each ownedClasses}}
-		{{name}}
-	{{/each}}
-
+	<nav class="navbar navbar-default" role="navigation">
+	  <ul class="nav navbar-nav">
+	        <li>{{> loginButtons}}</li>
+	        <button class="btn btn-primary btn-lg" id="homeLink">Home</button>
+	        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#meModal" id="meLink">Me</button>
+	        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#classModal" id="newClass">Create a Class</button>
+	        <button class="btn btn-primary btn-lg" id="browseClasses">Browse Classes</button>
+	  </ul>
+	  <form class="navbar-form navbar-left" role="search">
+	        <div class="form-group">
+	          <input type="text" class="form-control" placeholder="Search classes...">
+	          <button type="submit" class="btn btn-default">Search</button>
+	        </div>
+	  </form>
+	</nav>
 </template>
 
 <template name="newClass">
-	name: 
-	<input type="text" id="newClass_name" placeholder="name" />
-	<br/>
-	start date:
-	<input type="text" id="newClass_startDate" placeholder="MM/DD/YY" />
-	<br/>
-	end date:
-	<input type="text" id="newClass_endDate" placeholder="MM/DD/YY" />
-	<br/>
-	keywords:
-	<input type="text" id="newClass_keywords" placeholder="math, science, etc."/>
-	<br/>
-	upload frequency:
-	<input type="text" id="newClass_freq" placeholder="weekly, daily, monthly, etc." />
-	<br/>
-	<input type="button" id="newClass_submit" value="new class" />
+	<div class="modal fade" id="classModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">Create a New Class</h4>
+	      </div>
+	      <div class="modal-body">
+	        <form>
+	        	Class Name: <input type="text" name="classname" placeholder="(ex. AP Chemistry)" id="newClass_name"><br>
+	        	Upload Frequency: <input type="text" name="ulfreq" placeholder="(ex. Daily, Weekly, Monthly, etc.)" id="newClass_freq"><br>
+	        	Keywords: <input type="text" name="keywords" placeholder="(ex. Chemistry, AP Course)" id="newClass_keywords"><br>
+	        	Start Date: <input type="text" name="start" placeholder="MM/DD/YY" id="newClass_startDate"><br>
+	        	End Date: <input type="text" name="end" placeholder="MM/DD/YY" id="newClass_endDate"><br>
+	        	Upload PDF: <input type="file" name="firstpdf" id="newClass_pdf"><br>
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" id="newClass_submit">Create Class</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </template>
 
 <template name="browseClasses">
 	{{#each classes}}
-		{{name}} by {{user}} ({{rating}})
+		{{name}} by {{user}} (rating: {{rating}})
 		<br/>
 	{{/each}}
+</template>
+
+<template name="userProfile">
+	<div class="modal fade" id="meModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">{{username}}'s Profile</h4>
+	      </div>
+	      <div class="modal-body">
+	        <h1>welcome, {{username}}!</h1>
+			<br/>
+			classes you own:
+			{{#each ownedClasses}}
+				{{name}}
+			{{/each}}
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
 </template>
