@@ -6,13 +6,12 @@ if (Meteor.isClient) {
   Meteor.subscribe('userData');
   Meteor.subscribe('classes');
   
-  var ohno = document.getElementById("ohno");
 
-  //ohno.hide();
+  $("#ohno").hide();
   var meButton = document.getElementById("meLink");
 
   meButton.onclick = function() {
-            ohno.show();
+            $("#ohno").show();
             return false;
           };
 
