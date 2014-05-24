@@ -1,13 +1,14 @@
 classes = new Meteor.Collection("classes");
 
-var ohno = document.getElementById("ohno");
 
-ohno.hide();
 
 if (Meteor.isClient) {
   Meteor.subscribe('userData');
   Meteor.subscribe('classes');
+  
+  var ohno = document.getElementById("ohno");
 
+  ohno.hide();
   var meButton = document.getElementById("meLink");
 
   meButton.onclick = function() {
