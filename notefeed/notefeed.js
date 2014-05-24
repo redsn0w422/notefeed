@@ -1,4 +1,9 @@
+classes = new Meteor.Collection("classes");
+
 if (Meteor.isClient) {
+  Meteor.subscribe('userData');
+  Meteor.subscribe('classes');
+
   Template.hello.greeting = function () {
     return "Welcome to notefeed.";
   };
@@ -10,10 +15,30 @@ if (Meteor.isClient) {
         console.log("You pressed the button");
     }
   });
+
+  Template.class.classes = function() {
+    return classes.find();
+  };
 }
 
 if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
   });
+
+
+  Accounts.onCreateUser(function(options, user) {
+    user.own_classes = [];
+    user.sub_classes = [];
+    return user;
+  });
+
+  Meteor.publish("classes", function () {
+    return classes.find();
+  });
+
+  Meteor.publish("userData", function () {
+    return Meteor.users.find();
+  });
+
 }
