@@ -1,63 +1,108 @@
 <head>
-<title>notefeed</title>
+	<title>notefeed</title>
 </head>
-
 <body>
-<nav class="navbar navbar-default" role="navigation">
-  <ul class="nav navbar-nav">
-        <li>{{> loginButtons}}</li>
-        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#classModal">
-        	Create a Class
-        </button>
-  </ul>
-  <form class="navbar-form navbar-left" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search classes...">
-          <button type="submit" class="btn btn-default">Search</button>
-        </div>
-      </form>
-</nav>
-<div class="modal fade" id="classModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title" id="myModalLabel">Create a New Class</h4>
-      </div>
-      <div class="modal-body">
-        <form>
-        	Class Name <input type="text" name="classname"><br>
-        	Upload Frequency <input type="text" name="ulfreq"><br>
-        	Keywords <input type="text" name="keywords"><br>
-        	Start/End Date <input type="text" name="startend"><br>
-        	Upload PDF <input type="file" name="firstpdf"><br>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Create Class</button>
-      </div>
-    </div>
-  </div>
-</div>
-<div class ="row-fluid" style="font-family:arial">
-	<div class="span3">
-		Classes
+	{{> menubar}}
+	<div id="newClassForm">
+		{{> newClass}}	
 	</div>
-	<div class="span3">
-		PDFs
+
+	<div id="browseClassesDiv">
+		{{> browseClasses}}
 	</div>
-	<div class="span6"></div>
-</div>
 </body>
-<template name="hello">
-<div id="ohno">
-this is being shown
-</div>
-<input type="button" value="Click" />
+<template name="menubar">
+	<nav class="navbar navbar-default" role="navigation">
+	  <ul class="nav navbar-nav">
+	        <li>{{> loginButtons}}</li>
+	        <button class="btn btn-primary btn-lg" id="homeLink">Home</button>
+	        <button class="btn btn-primary btn-lg" data-toggel="modal" data-target="#meModal" id="meLink">Me</button>
+	        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#classModal">Create a Class</button>
+	        <button class="btn btn-primary btn-lg" id="browseClases">Browse Classes</button>
+	  </ul>
+	  <form class="navbar-form navbar-left" role="search">
+	        <div class="form-group">
+	          <input type="text" class="form-control" placeholder="Search classes...">
+	          <button type="submit" class="btn btn-default">Search</button>
+	        </div>
+	  </form>
+	</nav>
 </template>
-
-<template name="class">
-<h1>this is a class</h1>
+<template name="newClass">
+	<div class="modal fade" id="classModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">Create a New Class</h4>
+	      </div>
+	      <div class="modal-body">
+	        <form>
+	        	Class Name: <input type="text" name="classname" placeholder="(ex. AP Chemistry)" id="newClass_name"><br>
+	        	Upload Frequency: <input type="text" name="ulfreq" placeholder="(ex. Daily, Weekly, Monthly, etc.)" id="newClass_freq"><br>
+	        	Keywords: <input type="text" name="keywords" placeholder="(ex. Chemistry, AP Course)" id="newClass_keywords"><br>
+	        	Start Date: <input type="text" name="start" placeholder="MM/DD/YY" id="newClass_startDate"><br>
+	        	End Date: <input type="text" name="end" placeholder="MM/DD/YY" id="newClass_endDate"><br>
+	        	Upload PDF: <input type="file" name="firstpdf" id="newClass_pdf"><br>
+	        </form>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary" id="newClass_submit">Create Class</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<!--name: 
+	<input type="text" id="newClass_name" placeholder="name" />
+	<br/>
+	start date:
+	<input type="text" id="newClass_startDate" placeholder="MM/DD/YY" />
+	<br/>
+	end date:
+	<input type="text" id="newClass_endDate" placeholder="MM/DD/YY" />
+	<br/>
+	upload frequency:
+	<input type="text" id="newClass_freq" placeholder="weekly, daily, monthly, etc." />
+	<br/>
+	<input type="button" id="newClass_submit" value="new class" />
+-->
 </template>
-
+<template name="browseClasses">
+	{{#each classes}}
+		Name: {{name}}
+		Uploader: {{user}}
+		Start date: {{startDate}}
+		End date: {{endDate}}
+		Upload frequency: {{freq}}
+	{{/each}}
+</template>
+<template name="userProfile">
+	<h1>welcome, {{username}}!</h1>
+	<br/>
+	classes you own:
+	{{#each ownedClasses}}
+		{{name}}
+	{{/each}}
+	<div class="modal fade" id="meModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">{{username}}'s Profile</h4>
+	      </div>
+	      <div class="modal-body">
+	        <h1>welcome, {{username}}!</h1>
+			<br/>
+			classes you own:
+			{{#each ownedClasses}}
+				{{name}}
+			{{/each}}
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</template>
