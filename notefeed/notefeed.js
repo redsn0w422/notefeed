@@ -24,7 +24,15 @@ if (Meteor.isClient) {
 
   Template.newClass.events({
     'click #newClass_submit' : function () {
-      console.log("jeej");
+      var name = $("#newClass_name").val();
+      var user = Meteor.user().username;
+      var startDate = $("#newClass_startDate").val();
+      var endDate = $("#newClass_endDate").val();
+      var freq = $("#newClass_freq").val();
+
+      console.log(user);
+      console.log(Meteor.userId());
+
     }
   });
 
@@ -42,6 +50,7 @@ if (Meteor.isServer) {
   Accounts.onCreateUser(function(options, user) {
     user.own_classes = [];
     user.sub_classes = [];
+    user.compositeRating = 0;
     return user;
   });
 
