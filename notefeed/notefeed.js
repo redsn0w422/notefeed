@@ -1,5 +1,19 @@
 classes = new Meteor.Collection("classes");
 
+Meteor.methods({
+  addClass: function (name, user, startDate, endDate, freq) {
+
+    classes.insert({'name':name, 'user':user, 'startDate':startDate,
+        'endDate':endDate, 'freq':freq, 'notes':[]});
+    //check(arg1, String);
+    //check(arg2, [Number]);
+    // .. do stuff ..
+    // if (you want to throw an error)
+    //   throw new Meteor.Error(404, "Can't find my pants");
+    // return "some return value";
+  }
+});
+
 if (Meteor.isClient) {
   Accounts.ui.config({
     passwordSignupFields: 'USERNAME_ONLY'
@@ -34,12 +48,7 @@ if (Meteor.isClient) {
       var endDate = $("#newClass_endDate").val();
       var freq = $("#newClass_freq").val();
 
-      classes.insert({'name':name, 'user':user, 'startDate':startDate,
-        'endDate':endDate, 'freq':freq, 'notes':[]});
-      console.log({'name':name, 'user':user, 'startDate':startDate,
-        'endDate':endDate, 'freq':freq, 'notes':[]});
-
-
+      Meteor.call('addClass', name, user, startDate, endDate, freq);
     }
   });
 
