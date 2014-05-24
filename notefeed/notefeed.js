@@ -24,21 +24,19 @@ if (Meteor.isClient) {
   
   Meteor.startup(function () {
     $("#newClassForm").hide();
-  });
-
-  Template.hello.events({
-    'click input' : function () {
-      // template data, if any, is available in 'this'
-      console.log("clicked");
-      $("#ohno").show();
-    }
+    $("browseClassesDiv").hide();
   });
 
   Template.menubar.events({
     'click #newClass' : function () {
       $("#newClassForm").show();
+      $("browseClassesDiv").hide();
+    },
+    'click #browseClasses' : function () {
+      $("#newClassForm").hide();
+      $("browseClassesDiv").show();
     }
-  })
+  });
 
   Template.newClass.events({
     'click #newClass_submit' : function () {
@@ -52,7 +50,7 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.class.classes = function() {
+  Template.browseClasses.classes = function () {
     return classes.find();
   };
 }
