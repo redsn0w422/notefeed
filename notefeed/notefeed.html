@@ -72,11 +72,40 @@
 
 <template name="browseClasses">
 	{{#each classes}}
-		{{name}} by {{user}} (rating: {{rating}})
-		<br/>
+		<div class="btn-group">
+			<button class="btn btn-default" type="button">{{name}} by {{user}} (rating: {{rating}})</button>
+			<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type-"button">
+				<span class="caret"></span>
+    				<span class="sr-only">Toggle Dropdown</span>
+			</button>
+			<ul class="dropdown-menu" role="menu">
+				<li><a href="#viewClassModal">Open Class</a></li>
+    				<li><a href="#">Subscribe</a></li>
+  			</ul>
+			<br/>
+		</div>
+		
 	{{/each}}
 </template>
-
+<template>
+	<div class="modal fade" id="viewClassModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title" id="myModalLabel">{{username}}'s Profile</h4>
+	      </div>
+	      <div class="modal-body">
+	        subscribe to this class
+	        this is where pdfs go
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+</template>
 <template name="userProfile">
 	<div class="modal fade" id="meModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
