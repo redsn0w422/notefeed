@@ -4,7 +4,7 @@ Meteor.methods({
   addClass: function (name, user, startDate, endDate, freq) {
 
     classes.insert({'name':name, 'user':user, 'startDate':startDate,
-        'endDate':endDate, 'freq':freq, 'notes':[]});
+        'endDate':endDate, 'freq':freq, 'notes':[], 'rating':0});
     //check(arg1, String);
     //check(arg2, [Number]);
     // .. do stuff ..
@@ -19,9 +19,9 @@ if (Meteor.isClient) {
     passwordSignupFields: 'USERNAME_AND_EMAIL'
   });
 
-  Accounts.config({
-    sendVerificationEmail: 'true'
-  });
+  // Accounts.config({
+  //   sendVerificationEmail: 'true'
+  // });
 
   Meteor.subscribe('userData');
   Meteor.subscribe('classes');
@@ -35,10 +35,19 @@ if (Meteor.isClient) {
     'click #newClass' : function () {
       $("#newClassForm").show();
       $("#browseClassesDiv").hide();
+      $("#userProfile").hide();
+
     },
     'click #browseClasses' : function () {
       $("#newClassForm").hide();
       $("#browseClassesDiv").show();
+      $("#userProfile").hide();
+
+    }
+    'click #meLink' : function () {
+      $("#userProfile").show();
+      $("#browseClassesDiv").hide();
+      $("#newClassForm").hide();
     }
   });
 
@@ -57,6 +66,14 @@ if (Meteor.isClient) {
   Template.browseClasses.classes = function () {
     return classes.find();
   };
+
+  Template.userProfile.user = function () { 
+    return Meteor.user();
+  };
+
+  Template.userProfile.ownedClasses = function () {
+    return classes.find({'user':Meteor.user().username});
+  }
 }
 
 if (Meteor.isServer) {

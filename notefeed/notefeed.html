@@ -14,6 +14,10 @@
 		{{> browseClasses}}
 	</div>
 
+	<div id="userProfile">
+		{{> userProfile}}
+	</div>
+
 </body>
 
 <template name="menubar">
@@ -23,6 +27,16 @@
 	<a href="#" id="meLink">me</a>
 	<a href="#" id="newClass">new class</a>
 	<a href="#" id="browseClasses">browse classes</a>
+
+</template>
+
+<template name="userProfile">
+	<h1>welcome, {{user.username}}!</h1>
+	<br/>
+	classes you own:
+	{{#each ownedClasses}}
+		{{name}}
+	{{/each}}
 
 </template>
 
@@ -44,10 +58,7 @@
 
 <template name="browseClasses">
 	{{#each classes}}
-		Name: {{name}}
-		Uploader: {{user}}
-		Start date: {{startDate}}
-		End date: {{endDate}}
-		Upload frequency: {{freq}}
+		{{name}} by {{user}} ({{rating}})
+		<br/>
 	{{/each}}
 </template>
