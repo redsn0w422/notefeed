@@ -6,12 +6,14 @@ if (Meteor.isClient) {
   Meteor.subscribe('userData');
   Meteor.subscribe('classes');
   
-
-  $("#ohno").hide();
+  Meteor.startup(function () {
+    $("#ohno").hide();
+  });
 
   Template.hello.events({
     'click input' : function () {
       // template data, if any, is available in 'this'
+      console.log("clicked");
       $("#ohno").show();
     }
   });
