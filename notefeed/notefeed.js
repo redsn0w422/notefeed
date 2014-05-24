@@ -29,6 +29,7 @@ if (Meteor.isClient) {
   Meteor.startup(function () {
     $("#newClassForm").hide();
     $("#browseClassesDiv").hide();
+    $("#userProfile").hide();
   });
 
   Template.menubar.events({
