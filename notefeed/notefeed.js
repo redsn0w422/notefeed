@@ -30,11 +30,11 @@ if (Meteor.isClient) {
   Template.menubar.events({
     'click #newClass' : function () {
       $("#newClassForm").show();
-      $("browseClassesDiv").hide();
+      $("#browseClassesDiv").hide();
     },
     'click #browseClasses' : function () {
       $("#newClassForm").hide();
-      $("browseClassesDiv").show();
+      $("#browseClassesDiv").show();
     }
   });
 
