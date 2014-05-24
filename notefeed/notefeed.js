@@ -19,6 +19,10 @@ if (Meteor.isClient) {
     passwordSignupFields: 'USERNAME_AND_EMAIL'
   });
 
+  Accounts.config({
+    sendVerificationEmail: 'true'
+  });
+
   Meteor.subscribe('userData');
   Meteor.subscribe('classes');
   
