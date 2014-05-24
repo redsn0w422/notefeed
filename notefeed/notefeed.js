@@ -16,6 +16,10 @@ if (Meteor.isClient) {
     }
   });
 
+  $("#newClass_submit").click(function() {
+    console.log("new class");
+  });
+
   Template.class.classes = function() {
     return classes.find();
   };
