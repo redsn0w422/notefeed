@@ -1,1 +1,11 @@
 /* CSS declarations go here */
+body {
+    font-family: Helvetica Narrow, sans-serif;
+}
+
+#menubar {
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 10px; 
+	text-align: center;
+}
