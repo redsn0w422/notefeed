@@ -100,7 +100,7 @@ if (Meteor.isClient) {
     }
   };
 
-  Template.classPage.
+  // Template.classPage.
 }
 
 if (Meteor.isServer) {
