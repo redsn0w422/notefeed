@@ -8,7 +8,7 @@ if (Meteor.isClient) {
   
   var ohno = document.getElementById("ohno");
 
-  ohno.hide();
+  //ohno.hide();
   var meButton = document.getElementById("meLink");
 
   meButton.onclick = function() {
