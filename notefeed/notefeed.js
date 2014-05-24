@@ -8,22 +8,11 @@ if (Meteor.isClient) {
   
 
   $("#ohno").hide();
-  var meButton = document.getElementById("meLink");
-
-  meButton.onclick = function() {
-            $("#ohno").show();
-            return false;
-          };
-
-  Template.hello.greeting = function () {
-    return "Welcome to notefeed.";
-  };
 
   Template.hello.events({
     'click input' : function () {
       // template data, if any, is available in 'this'
-      if (typeof console !== 'undefined')
-        console.log("You pressed the button");
+      $("#ohno").show();
     }
   });
 
