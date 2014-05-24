@@ -16,8 +16,10 @@ if (Meteor.isClient) {
     }
   });
 
-  $("#newClass_submit").click(function() {
-    console.log("new class");
+  Template.newClass.events({
+    'click #newClass_submit' : function () {
+      console.log("jeej");
+    }
   });
 
   Template.class.classes = function() {
