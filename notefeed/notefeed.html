@@ -31,7 +31,7 @@
 </template>
 
 <template name="userProfile">
-	<h1>welcome, {{user.username}}!</h1>
+	<h1>welcome, {{username}!</h1>
 	<br/>
 	classes you own:
 	{{#each ownedClasses}}
@@ -49,6 +49,9 @@
 	<br/>
 	end date:
 	<input type="text" id="newClass_endDate" placeholder="MM/DD/YY" />
+	<br/>
+	keywords:
+	<input type="text" id="newClass_keywords" placeholder="math, science, etc."/>
 	<br/>
 	upload frequency:
 	<input type="text" id="newClass_freq" placeholder="weekly, daily, monthly, etc." />
