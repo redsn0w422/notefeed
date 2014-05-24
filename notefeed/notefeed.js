@@ -34,8 +34,11 @@ if (Meteor.isClient) {
       var endDate = $("#newClass_endDate").val();
       var freq = $("#newClass_freq").val();
 
-      console.log(user);
-      console.log(Meteor.userId());
+      classes.insert({'name':name, 'user':user, 'startDate':startDate,
+        'endDate':endDate, 'freq':freq, 'notes':[]});
+      console.log({'name':name, 'user':user, 'startDate':startDate,
+        'endDate':endDate, 'freq':freq, 'notes':[]});
+
 
     }
   });
