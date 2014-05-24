@@ -72,7 +72,15 @@ if (Meteor.isClient) {
   };
 
   Template.userProfile.ownedClasses = function () {
-    return classes.find({'user':Meteor.user().username});
+    if (Meteor.user() == null)
+    {
+      return classes.find();
+    }
+    else
+    {
+      return classes.find({'user':Meteor.user().username});
+    }
+    
   };
 
   Template.userProfile.username = function () { 
