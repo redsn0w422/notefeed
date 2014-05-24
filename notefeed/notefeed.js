@@ -1,9 +1,9 @@
 classes = new Meteor.Collection("classes");
 
 Meteor.methods({
-  addClass: function (name, user, keywords, startDate, endDate, freq) {
+  addClass: function (name, user, startDate, endDate, freq) {
 
-    classes.insert({'name':name, 'user':user, 'keywords':keywords, 'startDate':startDate,
+    classes.insert({'name':name, 'user':user, 'startDate':startDate,
         'endDate':endDate, 'freq':freq, 'notes':[], 'rating':0});
     //check(arg1, String);
     //check(arg2, [Number]);
@@ -56,16 +56,13 @@ if (Meteor.isClient) {
     'click #newClass_submit' : function () {
       var name = $("#newClass_name").val();
       var user = Meteor.user().username;
-      var keywords = $("#newClass_keywords").val();
       var startDate = $("#newClass_startDate").val();
       var endDate = $("#newClass_endDate").val();
       var freq = $("#newClass_freq").val();
 
       console.log("called new class submit");
 
-      Meteor.call('addClass', name, user, keywords, startDate, endDate, freq);
-      
-      $("#newClass_modal_body").val("Class creation successful!");
+      Meteor.call('addClass', name, user, startDate, endDate, freq);
     }
   });
 
@@ -99,8 +96,6 @@ if (Meteor.isClient) {
       return Meteor.user().username;
     }
   };
-
-  Template.classPage.
 }
 
 if (Meteor.isServer) {
@@ -110,6 +105,7 @@ if (Meteor.isServer) {
 
 
   Accounts.onCreateUser(function(options, user) {
+    user.own_classes = [];
     user.sub_classes = [];
     user.compositeRating = 0;
     return user;
