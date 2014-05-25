@@ -199,13 +199,13 @@ if (Meteor.isClient) {
     'click .fileUpload': function (event) {
       var classID = $(event.target).attr("data-classID");
       var classOwnerName = classes.findOne({"_id":classID}).user;
-      var classOwnerEmail = Meteor.users().findOne({"username":classOwnerName}).emails[0].address;
+      var classOwnerEmail = Meteor.users.findOne({"username":classOwnerName}).emails[0].address;
       var fileInputID = "#file" + classID;
       var file = $(fileInputID)[0].files[0];
       Meteor.saveFile(file, file.name);
       Meteor.call("addNotes", file.name, classID);
 
-      for(users in Meteor.users().find())
+      for(users in Meteor.users.find())
       {
         for(id in user.sub_classes) 
         {
