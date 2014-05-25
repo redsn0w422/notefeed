@@ -340,7 +340,7 @@ if (Meteor.isServer) {
       text: text
       });
     }
-  }
+  });
   
   Meteor.startup(function () {    
     process.env.MAIL_URL = 'smtp://ymostofi:CodeDay2014@smtp.sendgrid.com:587/';          
