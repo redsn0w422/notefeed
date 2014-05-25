@@ -133,7 +133,7 @@ if (Meteor.isClient) {
 
   Template.browseClasses.events({
     'click #subscribeButton' : function (event) {
-      var classID = event.target.data-classid;
+      var classID = event.target.data-classID;
       console.log(classID);
       Meteor.call("addSubscription", Meteor.user().username);
     }
