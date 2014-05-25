@@ -30,6 +30,7 @@ if (Meteor.isClient) {
     // $("#newClassForm").hide();
     // $("#browseClassesDiv").hide();
     // $("#userProfile").hide();
+    $(".modal").hide();
   });
 
   // Template.menubar.events({
