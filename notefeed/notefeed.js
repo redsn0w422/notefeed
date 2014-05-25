@@ -205,7 +205,7 @@ if (Meteor.isClient) {
       Meteor.saveFile(file, file.name);
       Meteor.call("addNotes", file.name, classID);
 
-      for(users in Meteor.users.find())
+      for(user in Meteor.users.find())
       {
         for(id in user.sub_classes) 
         {
