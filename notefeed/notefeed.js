@@ -28,6 +28,13 @@ Meteor.methods({
     var rating = (ratingTotal + 0.0)/numRatings;
     rating = Math.round(rating*100)/100;
     classes.update({_id: classID}, {$set: {'ratingTotal': ratingTotal, 'numRatings': numRatings, 'rating': rating}});
+  },
+
+  addNotes: function (filename, classID) {
+    var classObj = classes.findOne({_id: classID});
+    var notesList = classObj.notes;
+    notesList.push(filename);
+    classes.update({_id: classID}, {$set: {'notes': notesList}});
   }
 });
 
@@ -158,13 +165,9 @@ if (Meteor.isClient) {
     'click .fileUpload': function (event) {
       var classID = $(event.target).attr("data-classID");
       var fileInputID = "#file" + classID;
-      var fileInput = document.getElementById(fileInputID);
-      console.log(fileInputID);
-      console.log(fileInput);
-      console.log($(fileInputID).val());
       var file = $(fileInputID)[0].files[0];
       Meteor.saveFile(file, file.name);
-      //Meteor.call("addNotes", file.name, classID);
+      Meteor.call("addNotes", file.name, classID);
     },
     'click #subscribeButton' : function (event) {
       var classID = $(event.target).attr("data-classID");
@@ -177,44 +180,23 @@ if (Meteor.isClient) {
   };
 
   Template.browseClasses.isSubscriber = function () {
+    if (Meteor.user() == null)
+    {
+      return false;
+    }
     var classID = this._id
     var sub_class = classes.findOne({_id: classID});
     return Meteor.user().sub_classes.indexOf(classID) != -1;
   };
 
   Template.browseClasses.isUploader = function () {
+    if (Meteor.user() == null)
+    {
+      return false;
+    }
     var classID = this._id
     var sub_class = classes.findOne({_id: classID});
     return sub_class.user === Meteor.user().username;
-  };
-
-  Template.browseClasses.body = function () {
-    var classID = this._id
-    var sub_class = classes.findOne({_id: classID});
-    if (Meteor.user().sub_classes.indexOf(classID) != -1)
-    {
-      // user is subscribed to this class
-      var html = "";
-      for (var sheet in sub_class.notes)
-      {
-        html += sheet + "<br/>";
-      }
-
-      return html;
-    }
-    else if (sub_class.user == Meteor.user().username)
-    {
-      // user is owner of this class
-
-
-      $(".modal").hide();
-
-    }
-    else
-    {
-      $(".modal").hide();
-      return "no";
-    }
   };
 
   Template.userProfile.user = function () { 

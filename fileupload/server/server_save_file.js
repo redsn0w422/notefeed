@@ -6,7 +6,7 @@ Meteor.methods({
   saveFile: function(blob, name, path, encoding) {
     var path = cleanPath(path), fs = Npm.require('fs'),
       name = cleanName(name || 'file'), encoding = encoding || 'binary',
-      chroot = Meteor.chroot || process.env['PWD'] + '/public~';
+      chroot = Meteor.chroot || process.env['PWD'] + '/public';
     // Clean up the path. Remove any initial and final '/' -we prefix them-,
     // any sort of attempt to go to the parent directory '..' and any empty directories in
     // between '/////' - which may happen after removing '..'

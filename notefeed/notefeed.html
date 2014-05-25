@@ -91,14 +91,35 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	        {{name}}
+	        {{name}}   current rating: {{rating}}
 	      </div>
 	      <div class="modal-body">
-	        current rating: {{rating}}
 	        <br/>
 
+			{{#if isUploader}}
+			Uploader view
+	        <div id="uploaderDiv{{_id}}">
+	        	{{#each notes}}
+	        	<a href="/{{this}}">{{this}}</a>
+	        	<br/>
+	        	{{/each}}
+	        	<br/>
+
+	        	Upload a file: <input type="file" id="file{{_id}}">
+	        	<br/>
+	        	<input class="fileUpload" type="button" value="Upload" data-classID="{{_id}}"/>
+	        </div>
+	        {{else}}
+
 	        {{#if isSubscriber}}
+	        Subscriber view
 	        <div id="subscribeDiv{{_id}}">
+	        	{{#each notes}}
+	        	<a href="/{{this}}">{{this}}</a>
+	        	<br/>
+	        	{{/each}}
+	        	<br/>
+
 	        	<br/>Rate this:
 	        	<select id="ratingSelect{{_id}}">
 	        		<option value=1>1</option>
@@ -109,18 +130,21 @@
 	        	</select>
 	        	<input class="ratingUpdate" type="button" value="Update" data-classID="{{_id}}"/>
 	        </div>
-	        {{/if}}
 
-	        {{#if isUploader}}
-	        <div id="uploaderDiv{{_id}}">
-	        	Upload a file: <input type="file" id="file{{_id}}">
+	        {{else}}
+	        <div id="previewDiv{{_id}}">
+	        	Preview
+	        	{{#each notes}}
+	        	{{this}}
 	        	<br/>
-	        	<input class="fileUpload" type="button" value="Upload" data-classID="{{_id}}"/>
+	        	{{/each}}
+	        	<br/>
+	        	Subscribe to download notes!
 	        </div>
-	        {{/if}}
 
+	        {{/if}}
+	        {{/if}}
 	      </div>
-	      {{body}}
 	      <div class="modal-footer">
 	      	<button type="button" class="btn btn-success" data-dismiss="modal" id="subscribeButton" data-classID="{{_id}}">Subscribe!</button>
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
