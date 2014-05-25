@@ -86,26 +86,39 @@
   			</ul>
 			<br/>
 		</div>
-
 		<div class="modal fade" id="class{{_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	        {{name}}
-	      </div>
-	      <div class="modal-body">
-	        {{_id}}
-	      </div>
-	      <div class="modal-footer">
-	      	<button type="button" class="btn btn-success" data-dismiss="modal" id="subscribeButton" data-classID="{{_id}}">Subscribe!</button>
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-		
+		  <div class="modal-dialog">
+		  <div class="modal-content">
+		   <div class="modal-header">
+		     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		     {{name}}
+		   </div>
+		   <div class="modal-body">
+		     {{_id}}
+		   </div>
+		  <div class="modal-footer">
+		  	<button type="button" class="btn btn-success" data-dismiss="modal" id="subscribeButton" data-classID="{{_id}}">Subscribe!</button>
+		    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		   </div>
+		  </div>
+		 </div>
+		</div>
 	{{/each}}
+		<div id="classList">
+    			<input class="search"/>
+    			<span class="sort" data-sort="dateUL">Sort by Date First Uploaded</span>
+    			<span class="sort" data-sort="rating">Sort by Rating</span>
+			{{#each classes}}
+				<ul class="list">
+					<li>
+           					<p class="dateUL">{{startDate}}</p>
+           					<p class="rating">{{rating}}</p>
+       					</li>
+    				</ul>
+    			{{/each}}
+		</div>
+	
+	
 </template>
 
 <template name="userProfile">
