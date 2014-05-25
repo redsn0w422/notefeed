@@ -25,4 +25,7 @@
 #loginButtons_nav {
 	margin-right: 5px;
 	margin-left: 5px;
+	height: 35px;
+	padding-top: auto;
+	padding-bottom: auto;
 }
