@@ -73,7 +73,8 @@ if (Meteor.isClient) {
        item: '<li><h3 class="name"></h3></li>'
     };
     var values = [{name: 'Jonny Strömberg'}, {name: 'Jonas Arnklint'}, {name: 'Martina Elm'}];
-var userList = new List('users', options, values);
+    var userList = new List('users', options, values);
+  });
     //var options = {
     //valueNames: [ 'name', 'rating' ], item: '<li><h3 class="name"></h3><p class="rating"></p></li>'
     //};
@@ -190,7 +191,7 @@ var userList = new List('users', options, values);
   // Template.classPage.
 }
 
-if(Meteor.isServer) {
+if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
     
