@@ -91,7 +91,7 @@
 			<br/>
 		</div>
 
-		<div class="modal fade" id="class{{_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="class{{_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -99,7 +99,9 @@
 	        {{name}}
 	      </div>
 	      <div class="modal-body">
-	        {{_id}}
+	        current rating: {{rating}}
+	        <br/>
+	        {{body}}
 	      </div>
 	      <div class="modal-footer">
 	      	<button type="button" class="btn btn-success" data-dismiss="modal" id="subscribeButton" data-classID="{{_id}}">Subscribe!</button>

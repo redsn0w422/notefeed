@@ -137,13 +137,25 @@ if (Meteor.isClient) {
   Template.browseClasses.events({
     'click #subscribeButton' : function (event) {
       var classID = $(event.target).attr("data-classID");
-      console.log(classID);
       Meteor.call("addSubscription", Meteor.user().username, classID);
     }
   });
 
   Template.browseClasses.classes = function () {
     return classes.find();
+  };
+
+  Temlate.browseClasses.body = function (event) {
+    var classID = $(event.target).attr("data-classID");
+    if (Meteor.user().sub_classes.indexOf(classID) != -1)
+    {
+      // user is subscribed to this class
+      return "yes";
+    }
+    else
+    {
+      return "no";
+    }
   };
 
   Template.userProfile.user = function () { 
