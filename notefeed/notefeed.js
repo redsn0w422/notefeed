@@ -124,21 +124,19 @@ if (Meteor.isClient) {
       var endDate = $("#newClass_endDate").val();
       var freq = $("#newClass_freq").val();
 
-      console.log("called new class submit");
-
       Meteor.call('addClass', name, user, keywords, startDate, endDate, freq);
       
       //$("#newClass_modal_body").val("Class creation successful!");
     }
   });
 
-  Template.uploadPdf.events({
-      'change input': function(ev) {  
-        _.each(ev.currentTarget.files, function(file) {
-        Meteor.saveFile(file, file.name);
-      });
-    }
-  });
+  // Template.uploadPdf.events({
+  //     'change input': function(ev) {  
+  //       _.each(ev.currentTarget.files, function(file) {
+  //       Meteor.saveFile(file, file.name);
+  //     });
+  //   }
+  // });
 
   Template.browseClasses.events({
     'click #subscribeButton' : function (event) {
@@ -151,7 +149,8 @@ if (Meteor.isClient) {
     return classes.find();
   };
 
-  Template.browseClasses.body = function (classID) {
+  Template.browseClasses.body = function () {
+    var classID = this._id
     var sub_class = classes.findOne({_id: classID});
     if (Meteor.user().sub_classes.indexOf(classID) != -1)
     {
@@ -172,15 +171,28 @@ if (Meteor.isClient) {
       html += '</select>';
       html += '<input type="button" id="#ratingButton" value="Update"/>'
 
-      return html;
+      console.log("#subscribeDiv" + classID);
+      var divID = "#subscribeDiv" + classID;
+      console.log(divID);
+      console.log($(divID).html());
+
+      $("#subscriberDiv" + classID).html(html);
+
+      $(".modal").hide();
+
+      return "";
     }
     else if (sub_class.user == Meteor.user().username)
     {
       // user is owner of this class
-      
+
+
+      $(".modal").hide();
+
     }
     else
     {
+      $(".modal").hide();
       return "no";
     }
   };
