@@ -61,11 +61,6 @@
 	        	Keywords: <input type="text" name="keywords" placeholder="(ex. Chemistry, AP Course)" id="newClass_keywords"><br>
 	        	Start Date: <input type="text" name="start" placeholder="MM/DD/YY" id="newClass_startDate"><br>
 	        	End Date: <input type="text" name="end" placeholder="MM/DD/YY" id="newClass_endDate"><br>
-	        	Upload PDF: 
-	        	<form enctype="multipart/form-data" action="/upload" method="post">
-    				<input id="pdf-file" type="file" />
-    				<button type="submit" value="submit file"></button>
-				</form>
 	        </form>
 	      </div>
 	      <div class="modal-footer">
@@ -101,7 +96,7 @@
 	      <div class="modal-body">
 	        current rating: {{rating}}
 	        <br/>
-	        {{body }}
+	        {{body {{_id}}}}
 	      </div>
 	      <div class="modal-footer">
 	      	<button type="button" class="btn btn-success" data-dismiss="modal" id="subscribeButton" data-classID="{{_id}}">Subscribe!</button>

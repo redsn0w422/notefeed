@@ -132,6 +132,14 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.uploadPdf.events({
+      'change input': function(ev) {  
+        _.each(ev.currentTarget.files, function(file) {
+        Meteor.saveFile(file, file.name);
+      });
+    }
+  });
+
   Template.browseClasses.events({
     'click #subscribeButton' : function (event) {
       var classID = $(event.target).attr("data-classID");
@@ -143,12 +151,33 @@ if (Meteor.isClient) {
     return classes.find();
   };
 
-  Template.browseClasses.body = function (event) {
-    var classID = $(event.target).attr("data-classID");
+  Template.browseClasses.body = function (classID) {
+    var sub_class = classes.findOne({_id: classID});
     if (Meteor.user().sub_classes.indexOf(classID) != -1)
     {
       // user is subscribed to this class
-      return "yes";
+      var html = "";
+      for (var sheet in sub_class.notes)
+      {
+        html += sheet + "<br/>";
+      }
+
+      html += "<br/><br/>Rating";
+      html += '<select>';
+      html += '<option value=1>1</option>';
+      html += '<option value=1>2</option>';
+      html += '<option value=1>3</option>';
+      html += '<option value=1>4</option>';
+      html += '<option value=1>5</option>';
+      html += '</select>';
+      html += '<input type="button" id="#ratingButton" value="Update"/>'
+
+      return html;
+    }
+    else if (sub_class.user == Meteor.user().username)
+    {
+      // user is owner of this class
+      
     }
     else
     {
