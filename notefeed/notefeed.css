@@ -1,5 +1,11 @@
 /* CSS declarations go here */
 .navbar {
-	margin-left: 5px;
-	margin-right: 5px;
+	margin-top: 15px;
+	width: 95%;
+}
+
+#browseClassesDiv {
+	margin-top: 25px;
+	margin-left: 20px;
+	margin-right: 20px;
 }
