@@ -86,7 +86,14 @@
 			</button>
 			<ul class="dropdown-menu" role="menu">
 				<li><a href="#" data-toggle="modal" data-target="#class{{_id}}">View Class</a></li>
-    				<li><a href="#" id="subscribeButton" data-classID="{{_id}}">Subscribe</a></li>
+				{{#if isUploader}}
+	        	{{else}}
+
+	        	{{#if isSubscriber}}
+	        	{{else}}
+	            <li><a href="#" id="subscribeButton" data-classID="{{_id}}">Subscribe</a></li>
+	        	{{/if}}
+	        	{{/if}}
   			</ul>
 			<br/>
 		</div>
