@@ -192,6 +192,7 @@ if (Meteor.isClient) {
       var cursor = Meteor.users.find();
       cursor.forEach(function(user) 
       {
+        console.log(user.sub_classes);
         for(var id in user.sub_classes) 
         {
           console.log(id.indexOf(classID));
