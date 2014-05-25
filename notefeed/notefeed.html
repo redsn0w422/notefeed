@@ -123,9 +123,14 @@
 			<br/>
 			classes you own:
 			{{#each ownedClasses}}
-				{{name}}
+				<div class="btn-group">
+					<button class="btn btn-default" type="button" data-toggle="modal" data-target="#viewClassModal">{{name}}</button>
+					<ul class="dropdown-menu" role="menu">
+						<li><a href="#" data-toggle="modal" data-target="#viewClassModal">View Class</a></li>
+    						<li><a href="#">Subscribe</a></li>
+  					</ul>
+  				</div>
 			{{/each}}
-	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	      </div>
