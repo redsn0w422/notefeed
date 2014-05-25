@@ -187,6 +187,8 @@ if (Meteor.isClient) {
     },
     'click .fileUpload': function (event) {
       var classID = $(event.target).attr("data-classID");
+      var classOwnerName = classes.find({"_id":classID}).user;
+      var classOwnerEmail = Meteor.users().find({"name":classOwnerName}).emails.address;
       var fileInputID = "#file" + classID;
       var file = $(fileInputID)[0].files[0];
       Meteor.saveFile(file, file.name);
@@ -195,13 +197,13 @@ if (Meteor.isClient) {
       {
         for(id in user.sub_classes) 
         {
-          if(id.indexof(this._id) >-1)
+          if(id.indexof(class._id) >-1)
           {
             Meteor.call('sendEmail',
+               classOwnerEmail,
                user.emails.address,
-               class.user.emails.address,
-               class.user.name + ' update!',
-               class.user.name + ' has just uploaded a new set of notes!');
+               classOwnerName + ' update!',
+               classOwnerName + ' has just uploaded a new set of notes!');
           }
         }
     }
