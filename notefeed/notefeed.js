@@ -176,6 +176,10 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
+    var options = {
+    valueNames: [ 'dateUL', 'rating' ]
+    };
+  var classList = new List('classList', options);
   });
 
 
