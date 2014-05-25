@@ -6,6 +6,9 @@
 <body>
 	<h3 id="header">Welcome to NoteFeed</h3>
 	<div id="content">
+		<div id="loginButtons_div">
+			{> loginButtons}}
+		</div>
 	<div id="menubar2">
 		{{> menubar}}
 	</div>
@@ -36,7 +39,7 @@
 	<nav class="navbar navbar-default navbar-static-top" role="navigation">
 	<div class="container" id="navbar_container">
 	  <ul class="nav navbar-nav">
-	        <li id="loginButtons_nav">{{> loginButtons}}</li>
+	        <!-- <li id="loginButtons_nav">{{> loginButtons}}</li> -->
 	        <!-- <button class="btn btn-primary btn-lg" id="homeLink">Home</button>
 	        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#meModal" id="meLink">Me</button> -->
 	        <li><button class="btn btn-primary btn-lg navbarItem" data-toggle="modal" data-target="#classModal" id="newClass">Create a Class</button></li>
