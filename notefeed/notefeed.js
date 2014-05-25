@@ -331,14 +331,16 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
   Meteor.methods({
     sendEmail: function (to, from, subject, text) {
-    check([to, from, subject, text], [String]);
-    this.unblock();
-    Email.send({
-    to: to,
-    from: from,
-    subject: subject,
-    text: text}
-  });
+      check([to, from, subject, text], [String]);
+      this.unblock();
+      Email.send({
+      to: to,
+      from: from,
+      subject: subject,
+      text: text
+      });
+    }
+  }
   
   Meteor.startup(function () {    
     process.env.MAIL_URL = 'smtp://ymostofi:CodeDay2014@smtp.sendgrid.com:587/';          
