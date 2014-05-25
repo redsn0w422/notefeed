@@ -187,8 +187,8 @@ if (Meteor.isClient) {
     },
     'click .fileUpload': function (event) {
       var classID = $(event.target).attr("data-classID");
-      var classOwnerName = classes.find({"_id":classID}).user;
-      var classOwnerEmail = Meteor.users().find({"username":classOwnerName}).emails.address;
+      var classOwnerName = classes.findOne({"_id":classID}).user;
+      var classOwnerEmail = Meteor.users().findOne({"username":classOwnerName}).emails[0].address;
       var fileInputID = "#file" + classID;
       var file = $(fileInputID)[0].files[0];
       Meteor.saveFile(file, file.name);
