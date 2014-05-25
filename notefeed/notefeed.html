@@ -1,17 +1,9 @@
 <head>
 	<title>notefeed</title>
-	<link href='http://fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
-
 </head>
 <body>
-	<div id="header">
-		<div id="loginButtons_div">
-				{{> loginButtons}}
-			</div>
-		<h3 id="headerText">Welcome to NoteFeed</h3>
-	</div>
+	<h1>Welcome to NoteFeed</h1>
 	<div id="content">
-		
 	<div id="menubar2">
 		{{> menubar}}
 	</div>
@@ -28,13 +20,8 @@
 		{{> userProfile}}
 	</div>
 
-	<!-- <div id="footer">
-		Made by <a href="yashamostofi.com/home">Yasha Mostofi,</a> <a href="mailto:kianf2011@gmail.com">Kian Fotovat,</a> <a href="mailto:nallink01@gmail.com">Nathan Lindquist,</a> and <a href="mailto:jskbmksh235@gmail.com">Jayson Shiau</a>
-		<br/>
-		in 24 hours at <a href="codeday.org">CodeDay</a> Chicago
-	</div> -->
-
-
+	<div id="classPage">
+	</div>
 	</div>
 
 </body>
@@ -47,22 +34,24 @@
 	<nav class="navbar navbar-default navbar-static-top" role="navigation">
 	<div class="container" id="navbar_container">
 	  <ul class="nav navbar-nav">
-	        <!-- <li id="loginButtons_nav">{{> loginButtons}}</li> -->
+	  	<div id="loginButtons_nav">
+	        <li>{{> loginButtons}}</li>
+	    </div>
 	        <!-- <button class="btn btn-primary btn-lg" id="homeLink">Home</button>
 	        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#meModal" id="meLink">Me</button> -->
-	        <li><button class="btn btn-primary btn-lg navbarItem" data-toggle="modal" data-target="#classModal" id="newClass">Create a Class</button></li>
-	        <li><select id="searchFilter" class="btn btn-default navbarItem">
+	        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#classModal" id="newClass">Create a Class</button>
+	        <select id="searchFilter" class="btn btn-default">
 	  			<option value="1">All</option>
 	  			<option value="2">Uploading to</option>
 	  			<option value="3">Subscribing to</option>
-	  		</select></li>
-	  		<li><form class="navbar-form navbar-right navbarItem" role="search">
-	        <div class="form-group">
-	          <input type="text" class="form-control navbarItem" placeholder="Search classes..." id="searchBar">
-	          <button type="button" class="btn btn-default" id="search">Search</button>
-	        </div></form></li>
+	  		</select>
 	  </ul>
-	  
+	  <form class="navbar-form navbar-right" role="search">
+	        <div class="form-group">
+	          <input type="text" class="form-control" placeholder="Search classes..." id="searchBar">
+	          <button type="button" class="btn btn-default" id="search">Search</button>
+	        </div>
+	  </form>
 	</div>
 	</nav>
 </template>
