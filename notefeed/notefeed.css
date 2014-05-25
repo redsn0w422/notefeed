@@ -1,5 +1,5 @@
 /* CSS declarations go here */
-#browseClassInstance {
-	margin: 5px;
-	padding: 5px;
+.navbar {
+	margin-left: 5px;
+	margin-right: 5px;
 }
