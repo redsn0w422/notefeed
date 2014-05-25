@@ -1,4 +1,9 @@
 /* CSS declarations go here */
+#header {
+	text-align: center;
+	font-family: 'Lobster', cursive;
+}
+
 .navbar {
 	margin-top: 15px;
 	width: 95%;
