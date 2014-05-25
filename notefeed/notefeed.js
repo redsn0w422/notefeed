@@ -12,6 +12,12 @@ Meteor.methods({
     //   throw new Meteor.Error(404, "Can't find my pants");
     // return "some return value";
   }
+
+  addSubscription: function (name, classID) {
+    var user = Meteor.users.findOne({'username': name});
+    var subscriptionList = user.sub_classes;
+
+  }
 });
 
 if (Meteor.isClient) {
@@ -22,6 +28,48 @@ if (Meteor.isClient) {
   // Accounts.config({
   //   sendVerificationEmail: 'true'
   // });
+
+  Meteor.autosubscribe(function() {
+    classes.find().observe({
+      added: function(item) {
+        var newHTML = '';
+
+        for classy in classes.find()
+        {
+          newHTML += '<div class="btn-group" id="browseClass_'+classy._id+'">
+      <button class="btn btn-default" type="button" data-toggle="modal" data-target="#'+classy._id+'">'+classy.name+' by '+classy.user+' (rating: '+classy.rating+')</button>
+      <button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+        <span class="caret"></span>
+            <span class="sr-only"></span>
+      </button>
+      <ul class="dropdown-menu" role="menu">
+        <li><a href="#" data-toggle="modal" data-target="#'+classy._id+'">View Class</a></li>
+            <li><a href="#" id="subscribeButton">Subscribe</a></li>
+        </ul>
+      <br/>
+    </div>
+
+    <div class="modal fade" id="'+classy._id+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        </div>
+        <div class="modal-body">
+          this is class '+classy.name+'
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal" id="subscribeButton">Subscribe!</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>';
+        }
+
+        $("#browseClassesDiv").html(newHTML);
+     }
+    });
+  });
 
   Meteor.subscribe('userData');
   Meteor.subscribe('classes');
@@ -67,6 +115,12 @@ if (Meteor.isClient) {
       Meteor.call('addClass', name, user, keywords, startDate, endDate, freq);
       
       //$("#newClass_modal_body").val("Class creation successful!");
+    }
+  });
+
+  Template.browseClasses.events({
+    'click #subscribeButton' : function () {
+      Meteor.call("addSubscription", Meteor.user().username);
     }
   });
 
