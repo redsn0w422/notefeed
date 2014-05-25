@@ -69,11 +69,23 @@ if (Meteor.isClient) {
     // $("#userProfile").hide();
     $(".modal").hide();
     var options = {
-       valueNames: [ 'name' ],
-       item: '<li><h3 class="name"></h3></li>'
-    };
-    var values = [{name: 'Jonny Strömberg'}, {name: 'Jonas Arnklint'}, {name: 'Martina Elm'}];
-    var userList = new List('users', options, values);
+  valueNames: [ 'name' ],
+  item: '<li><h3 class="name"></h3></li>'
+};
+var values = [{
+    name: 'Jonny Strömberg',
+    born: 1986
+  },
+  {
+    name: 'Jonas Arnklint',
+    born: 1985
+  },
+  {
+    name: 'Martina Elm',
+    born: 1986
+}];
+
+var userList = new List('users', options, values);
   });
     //var options = {
     //valueNames: [ 'name', 'rating' ], item: '<li><h3 class="name"></h3><p class="rating"></p></li>'
