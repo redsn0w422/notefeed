@@ -155,6 +155,22 @@ if (Meteor.isClient) {
   //   }
   // });
 
+  Template.menubar.events({
+    'click #search' : function (event) {
+      var query = $("#searchBar").val();
+      var classes_found = [];
+      var index = 0;
+      for (var classy in classes.find())
+      {
+        if (classy.name.indexOf(query) > -1)
+        {
+          classes_found[index] = classy._id;
+          index++;
+        }
+      }
+    }
+  });
+
   Template.browseClasses.events({
     'click .ratingUpdate': function (event) {
       var classID = $(event.target).attr("data-classID");
