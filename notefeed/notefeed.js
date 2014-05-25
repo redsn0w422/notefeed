@@ -86,6 +86,7 @@ if (Meteor.isClient) {
     // $("#browseClassesDiv").hide();
     // $("#userProfile").hide();
     $(".modal").hide();
+    Session.setDefault("filterVal", "1");
   });
   //   var newHTML = '';
 
@@ -132,6 +133,12 @@ if (Meteor.isClient) {
   //   }
   // });
 
+  Template.menubar.events({
+    'change #searchFilter': function () {
+      Session.set("filterVal", $("#searchFilter").val());
+    }
+  });
+
   Template.newClass.events({
     'click #newClass_submit' : function () {
       var name = $("#newClass_name").val();
@@ -175,9 +182,33 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.browseClasses.classes = function () {
-    return classes.find();
-  };
+    Template.browseClasses.classes = function () {
+    console.log("classes updated");
+    if (Meteor.user() == null)
+    {
+      return classes.find();
+    }
+
+    var filterVal = Session.get("filterVal");
+    filterVal = parseInt(filterVal);
+    console.log(filterVal);
+    switch(filterVal) {
+      case 1: // all
+      console.log(classes.find());
+        return classes.find();
+        break;
+      case 2: // uploading to
+      console.log(classes.find({'user': Meteor.user().username}));
+        return classes.find({'user': Meteor.user().username});
+        break;
+      case 3: //subscribing to
+        var idList = Meteor.user().sub_classes;
+        return classes.find({_id: {$in: idList}});
+        break;
+      }
+      };
+
+    
 
   Template.browseClasses.isSubscriber = function () {
     if (Meteor.user() == null)
