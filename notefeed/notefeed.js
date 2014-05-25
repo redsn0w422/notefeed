@@ -171,7 +171,18 @@ if (Meteor.isClient) {
       {
         if (classy.name.indexOf(query) > -1)
         {
-          classes_found[index] = classy._id;
+          var class_json = { "_id" : classy._id, 
+          "endDate" : classy.endDate, 
+          "freq" : classy.freq, 
+          "keywords" : classy.keywords, 
+          "name" : classy.name, 
+          "notes" : classy.notes, 
+          "numRatings" : classy.numRatings; 
+          "rating" : classy.rating, 
+          "ratingTotal" : classy.ratingTotal, 
+          "startDate" : classy.startDate, 
+          "user" : classy.user };
+          classes_found[index] = class_json;
           index++;
         }
       }
