@@ -337,7 +337,7 @@ if (Meteor.isServer) {
     to: to,
     from: from,
     subject: subject,
-    text: text
+    text: text}
   });
   
   Meteor.startup(function () {    
