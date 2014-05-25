@@ -162,6 +162,22 @@ if (Meteor.isClient) {
   //   }
   // });
 
+  Template.menubar.events({
+    'click #search' : function (event) {
+      var query = $("#searchBar").val();
+      var classes_found = [];
+      var index = 0;
+      for (var classy in classes.find())
+      {
+        if (classy.name.indexOf(query) > -1)
+        {
+          classes_found[index] = classy._id;
+          index++;
+        }
+      }
+    }
+  });
+
   Template.browseClasses.events({
     'click .ratingUpdate': function (event) {
       var classID = $(event.target).attr("data-classID");
@@ -175,6 +191,20 @@ if (Meteor.isClient) {
       var file = $(fileInputID)[0].files[0];
       Meteor.saveFile(file, file.name);
       Meteor.call("addNotes", file.name, classID);
+      for(users in Meteor.users.find())
+      {
+        for(id in user.sub_classes) 
+        {
+          if(id.indexof(this._id) >-1)
+          {
+            Meteor.call('sendEmail',
+               user.emails.address,
+               this.user.emails.address,
+               this.user.name + ' update!',
+               this.user.name + ' has just uploaded a new set of notes!');
+          }
+        }
+    }
     },
     'click #subscribeButton' : function (event) {
       var classID = $(event.target).attr("data-classID");
@@ -209,6 +239,27 @@ if (Meteor.isClient) {
       };
 
     
+
+  Template.browseClasses.btnType = function() {
+    if (Meteor.user() == null)
+    {
+      return false;
+    }
+    var classID = this._id
+    var sub_class = classes.findOne({_id: classID});
+    if (Meteor.user().sub_classes.indexOf(classID) != -1)
+    {
+      return "btn-success";
+    }
+    else if (sub_class.user === Meteor.user().username)
+    {
+      return "btn-info";
+    }
+    else
+    {
+      return "btn-default";
+    }
+  };
 
   Template.browseClasses.isSubscriber = function () {
     if (Meteor.user() == null)
@@ -263,6 +314,21 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
+    Meteor.methods({
+  sendEmail: function (to, from, subject, text) {
+    check([to, from, subject, text], [String]);
+    this.unblock();
+    Email.send({
+      to: to,
+      from: from,
+      subject: subject,
+      text: text
+    });
+  }
+});
+  Meteor.startup(function () {    
+    process.env.MAIL_URL = 'smtp://ymostofi:CodeDay2014@smtp.sendgrid.com:587/';          
+ });
   });
 
 

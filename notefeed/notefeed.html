@@ -37,10 +37,10 @@
 	        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#meModal" id="meLink">Me</button>
 	        <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#classModal" id="newClass">Create a Class</button>
 	  </ul>
-	  <form class="navbar-form navbar-left" role="search">
+	  <form class="navbar-form navbar-right" role="search">
 	        <div class="form-group">
-	          <input type="text" class="form-control" placeholder="Search classes...">
-	          <button type="submit" class="btn btn-default">Search</button>
+	          <input type="text" class="form-control" placeholder="Search classes..." id="searchBar">
+	          <button type="submit" class="btn btn-default" id="search">Search</button>
 	        </div>
 	  </form>
 	  <select id="searchFilter">
@@ -79,14 +79,21 @@
 <template name="browseClasses">
 	{{#each classes}}
 		<div class="btn-group" id="browseClassInstance">
-			<button class="btn btn-default" type="button" data-toggle="modal" data-target="#class{{_id}}">{{name}} by {{user}} (rating: {{rating}})</button>
-			<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+			<button class="btn {{btnType}}" type="button" data-toggle="modal" data-target="#class{{_id}}">{{name}} by {{user}} (rating: {{rating}})</button>
+			<button class="btn {{btnType}} dropdown-toggle" data-toggle="dropdown" type="button">
 				<span class="caret"></span>
     				<span class="sr-only"></span>
 			</button>
 			<ul class="dropdown-menu" role="menu">
 				<li><a href="#" data-toggle="modal" data-target="#class{{_id}}">View Class</a></li>
-    				<li><a href="#" id="subscribeButton" data-classID="{{_id}}">Subscribe</a></li>
+				{{#if isUploader}}
+	        	{{else}}
+
+	        	{{#if isSubscriber}}
+	        	{{else}}
+	            <li><a href="#" id="subscribeButton" data-classID="{{_id}}">Subscribe</a></li>
+	        	{{/if}}
+	        	{{/if}}
   			</ul>
 			<br/>
 		</div>
@@ -102,7 +109,7 @@
 	        <br/>
 
 			{{#if isUploader}}
-			Uploader view
+			<i>Uploader view</i>
 	        <div id="uploaderDiv{{_id}}">
 	        	{{#each notes}}
 	        	<a href="/{{this}}">{{this}}</a>
@@ -112,12 +119,12 @@
 
 	        	Upload a file: <input type="file" id="file{{_id}}">
 	        	<br/>
-	        	<input class="fileUpload" type="button" value="Upload" data-classID="{{_id}}"/>
+	        	<input class="fileUpload" type="button" value="Upload" data-classID="{{_id}}" id="ulFileBtn"/>
 	        </div>
 	        {{else}}
 
 	        {{#if isSubscriber}}
-	        Subscriber view
+	        <i>Subscriber view</i>
 	        <div id="subscribeDiv{{_id}}">
 	        	{{#each notes}}
 	        	<a href="/{{this}}">{{this}}</a>
@@ -138,7 +145,10 @@
 
 	        {{else}}
 	        <div id="previewDiv{{_id}}">
-	        	Preview
+	        	<i>Preview:</i> <a href="/{{notes.[0]}}">{{notes.[0]}}</a>
+	        	<br/>
+	        	<br/>
+	        	All notes: (subscribe to view)
 	        	<br/>
 	        	{{#each notes}}
 	        	{{this}}
@@ -152,8 +162,21 @@
 	        {{/if}}
 	      </div>
 	      <div class="modal-footer">
-	      	<button type="button" class="btn btn-success" data-dismiss="modal" id="subscribeButton" data-classID="{{_id}}">Subscribe!</button>
+	      	{{#if isUploader}}
+	       	<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+	        {{else}}
+
+	        {{#if isSubscriber}}
+	       	<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+
+	        {{else}}
+	       	<button type="button" class="btn btn-success" id="subscribeButton" data-classID="{{_id}}">Subscribe!</button>
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+	        {{/if}}
+	        {{/if}}
+<!-- 	      	<button type="button" class="btn btn-success" data-dismiss="modal" id="subscribeButton" data-classID="{{_id}}">Subscribe!</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
 	      </div>
 	    </div>
 	  </div>
