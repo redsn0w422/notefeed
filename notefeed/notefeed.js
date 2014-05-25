@@ -18,8 +18,6 @@ Meteor.methods({
     var subscriptionList = user.sub_classes;
     subscriptionList.push(classID);
     Meteor.users.update({'username': name}, {$set: {'sub_classes': subscriptionList}});
-    console.log("hiii");
-
   }
 });
 
