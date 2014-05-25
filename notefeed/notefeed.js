@@ -205,25 +205,26 @@ if (Meteor.isClient) {
       Meteor.saveFile(file, file.name);
       Meteor.call("addNotes", file.name, classID);
 
-      for(user in Meteor.users.find())
-      {
-        for(id in user.sub_classes) 
-        {
-          if(id.indexof(classID) >-1)
-          {
-            // Meteor.call('sendEmail',
-            //    classOwnerEmail,
-            //    user.emails[0].address,
-            //    classOwnerName + ' update!',
-            //    classOwnerName + ' has just uploaded a new set of notes!');
-            Meteor.call('sendEmail',
+      Meteor.call('sendEmail',
                "sonofthebrownguy@gmail.com",
                "yasha.mostofi@gmail.com",
                "update!",
                "new notes!");
-          }
-        }
-    }
+
+      // for(user in Meteor.users.find())
+      // {
+      //   for(id in user.sub_classes) 
+      //   {
+      //     if(id.indexof(classID) >-1)
+      //     {
+      //       Meteor.call('sendEmail',
+      //          classOwnerEmail,
+      //          user.emails[0].address,
+      //          classOwnerName + ' update!',
+      //          classOwnerName + ' has just uploaded a new set of notes!');
+      //     }
+      //   }
+      // }
     },
     'click #subscribeButton' : function (event) {
       var classID = $(event.target).attr("data-classID");
@@ -334,15 +335,15 @@ if (Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
     Meteor.methods({
-  sendEmail: function (to, from, subject, text) {
-    check([to, from, subject, text], [String]);
-    this.unblock();
-    Email.send({
-      to: to,
-      from: from,
-      subject: subject,
-      text: text
-    });
+      sendEmail: function (to, from, subject, text) {
+      check([to, from, subject, text], [String]);
+      this.unblock();
+      Email.send({
+        to: to,
+        from: from,
+        subject: subject,
+        text: text
+      });
   }
 });
   Meteor.startup(function () {    
