@@ -1,7 +1,17 @@
 /* CSS declarations go here */
+body {
+	background-image: url('background.jpg');
+  	background-position: center;
+  	background-repeat: repeat-y;
+}
+
 #headerText {
 	text-align: center;
 	font-family: 'Lobster', cursive;
+}
+
+#header {
+	color: white;
 }
 
 .navbar {
@@ -27,6 +37,10 @@
 	padding: 0px;
 	top: 0px;
 	left: 0px;
+}
+
+#footer {
+	bottom: ;
 }
 
 /*#loginButtons_nav {
