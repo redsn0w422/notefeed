@@ -177,7 +177,7 @@ if (Meteor.isClient) {
           "keywords" : classy.keywords, 
           "name" : classy.name, 
           "notes" : classy.notes, 
-          "numRatings" : classy.numRatings; 
+          "numRatings" : classy.numRatings,
           "rating" : classy.rating, 
           "ratingTotal" : classy.ratingTotal, 
           "startDate" : classy.startDate, 
@@ -204,6 +204,7 @@ if (Meteor.isClient) {
       var file = $(fileInputID)[0].files[0];
       Meteor.saveFile(file, file.name);
       Meteor.call("addNotes", file.name, classID);
+
       for(users in Meteor.users.find())
       {
         for(id in user.sub_classes) 
