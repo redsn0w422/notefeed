@@ -86,7 +86,7 @@ if (Meteor.isClient) {
     // $("#browseClassesDiv").hide();
     // $("#userProfile").hide();
     $(".modal").hide();
-    Session.setDefault("filterVal", "1");
+    Session.set("filterVal", "1");
   });
   //   var newHTML = '';
 
@@ -134,7 +134,7 @@ if (Meteor.isClient) {
   // });
 
   Template.menubar.events({
-    'change #searchFilter': function () {
+    'click #searchFilter': function () {
       Session.set("filterVal", $("#searchFilter").val());
     }
   });
@@ -164,17 +164,7 @@ if (Meteor.isClient) {
 
   Template.menubar.events({
     'click #search' : function (event) {
-      var query = $("#searchBar").val();
-      var classes_found = [];
-      var index = 0;
-      for (var classy in classes.find())
-      {
-        if (classy.name.indexOf(query) > -1)
-        {
-          classes_found[index] = classy._id;
-          index++;
-        }
-      }
+      Session.set("filterVal", parseInt(Session.get("filterVal")) + 4);
     }
   });
 
@@ -234,6 +224,24 @@ if (Meteor.isClient) {
       case 3: //subscribing to
         var idList = Meteor.user().sub_classes;
         return classes.find({_id: {$in: idList}});
+        break;
+      default:
+        var query = $("#searchBar").val();
+        var classes_found = [];
+        var index = 0;
+        var cursor = classes.find();
+        cursor.forEach(function (doc) {
+          console.log(doc);
+          console.log(doc.name);
+          if (doc.name.indexOf(query) > -1)
+          {
+            console.log("yay");
+            classes_found.push( doc._id);
+            index++;
+          }
+        });
+
+        return classes.find({_id: {$in: classes_found}});
         break;
       }
       };
