@@ -69,17 +69,23 @@ if (Meteor.isClient) {
     // $("#userProfile").hide();
     $(".modal").hide();
     var options = {
-    valueNames: [ 'name', 'rating' ], item: '<li><h3 class="name"></h3><p class="rating"></p></li>'
+       valueNames: [ 'name' ],
+       item: '<li><h3 class="name"></h3></li>'
     };
-    var classesNew = [{name: 'kian'}, {name: 'john'}, {name: 'luke'}, {name: 'more test text'}];
+    var values = [{name: 'Jonny Strömberg'}, {name: 'Jonas Arnklint'}, {name: 'Martina Elm'}];
+var userList = new List('users', options, values);
+    //var options = {
+    //valueNames: [ 'name', 'rating' ], item: '<li><h3 class="name"></h3><p class="rating"></p></li>'
+    //};
+   // var classesNew = [{name: 'kian'}, {name: 'john'}, {name: 'luke'}, {name: 'more test text'}];
     //var index = 0;
   //  for (var classy in classes.find())
   //  {
     //  classesNew[index] = {name:classy.name, rating:classy.rating};
     //  index++;
   //  }
-    var classList = new List('classList', options, classesNew);
-  });
+   // var classList = new List('classList', options, classesNew);
+ // });
   // var newHTML = '';
 
   // for (var classy in classes.find())
