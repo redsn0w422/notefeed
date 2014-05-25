@@ -193,6 +193,7 @@ if (Meteor.isClient) {
       cursor.forEach(function(user) 
       {
         console.log(user.sub_classes);
+        console.log(user.username);
         for(var id in user.sub_classes) 
         {
           console.log(id.indexOf(classID));
