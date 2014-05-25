@@ -71,13 +71,13 @@ if (Meteor.isClient) {
     var options = {
     valueNames: [ 'name', 'rating' ], item: '<li><h3 class="name"></h3><p class="rating"></p></li>'
     };
-    var classesNew = [];
-    var index = 0;
-    for (var classy in classes.find())
-    {
-      classesNew[index] = {name:classy.name, rating:classy.rating};
-      index++;
-    }
+    var classesNew = [{name: 'kian'}, {name: 'john'}, {name: 'luke'}, {name: 'more test text'}];
+    //var index = 0;
+  //  for (var classy in classes.find())
+  //  {
+    //  classesNew[index] = {name:classy.name, rating:classy.rating};
+    //  index++;
+  //  }
     var classList = new List('classList', options, classesNew);
   });
   // var newHTML = '';
