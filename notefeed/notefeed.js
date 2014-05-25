@@ -11,7 +11,7 @@ Meteor.methods({
     // if (you want to throw an error)
     //   throw new Meteor.Error(404, "Can't find my pants");
     // return "some return value";
-  }
+  },
 
   addSubscription: function (name, classID) {
     var user = Meteor.users.findOne({'username': name});
