@@ -39,6 +39,9 @@ body {
 	left: 0px;
 }
 
+html, body, #container { height: 100%; }
+body > #container { height: auto; min-height: 100%; }
+
 #footer {
     clear: both;
     position: relative;
