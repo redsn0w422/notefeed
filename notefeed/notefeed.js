@@ -4,7 +4,7 @@ Meteor.methods({
   addClass: function (name, user, keywords, startDate, endDate, freq) {
 
     classes.insert({'name':name, 'user':user, 'keywords':keywords, 'startDate':startDate,
-        'endDate':endDate, 'freq':freq, 'notes':[], 'rating':0});
+        'endDate':endDate, 'freq':freq, 'notes':[], 'ratingTotal': 0, 'numRatings': 0, 'rating': null});
     //check(arg1, String);
     //check(arg2, [Number]);
     // .. do stuff ..
@@ -18,6 +18,16 @@ Meteor.methods({
     var subscriptionList = user.sub_classes;
     subscriptionList.push(classID);
     Meteor.users.update({'username': name}, {$set: {'sub_classes': subscriptionList}});
+  },
+
+  updateRating: function (newRating, classID) {
+    var ratingInt = parseInt(newRating);
+    var classObj = classes.findOne({_id: classID});
+    var ratingTotal = classObj.ratingTotal + ratingInt;
+    var numRatings = classObj.numRatings + 1;
+    var rating = (ratingTotal + 0.0)/numRatings;
+    rating = Math.round(rating*100)/100;
+    classes.update({_id: classID}, {$set: {'ratingTotal': ratingTotal, 'numRatings': numRatings, 'rating': rating}});
   }
 });
 
@@ -139,6 +149,23 @@ if (Meteor.isClient) {
   // });
 
   Template.browseClasses.events({
+    'click .ratingUpdate': function (event) {
+      var classID = $(event.target).attr("data-classID");
+      var selectID = "#ratingSelect" + classID;
+      var rating = $(selectID).val();
+      Meteor.call("updateRating", rating, classID);
+    },
+    'click .fileUpload': function (event) {
+      var classID = $(event.target).attr("data-classID");
+      var fileInputID = "#file" + classID;
+      var fileInput = document.getElementById(fileInputID);
+      console.log(fileInputID);
+      console.log(fileInput);
+      console.log($(fileInputID).val());
+      var file = $(fileInputID)[0].files[0];
+      Meteor.saveFile(file, file.name);
+      //Meteor.call("addNotes", file.name, classID);
+    },
     'click #subscribeButton' : function (event) {
       var classID = $(event.target).attr("data-classID");
       Meteor.call("addSubscription", Meteor.user().username, classID);
@@ -147,6 +174,18 @@ if (Meteor.isClient) {
 
   Template.browseClasses.classes = function () {
     return classes.find();
+  };
+
+  Template.browseClasses.isSubscriber = function () {
+    var classID = this._id
+    var sub_class = classes.findOne({_id: classID});
+    return Meteor.user().sub_classes.indexOf(classID) != -1;
+  };
+
+  Template.browseClasses.isUploader = function () {
+    var classID = this._id
+    var sub_class = classes.findOne({_id: classID});
+    return sub_class.user === Meteor.user().username;
   };
 
   Template.browseClasses.body = function () {
@@ -161,26 +200,7 @@ if (Meteor.isClient) {
         html += sheet + "<br/>";
       }
 
-      html += "<br/><br/>Rating";
-      html += '<select>';
-      html += '<option value=1>1</option>';
-      html += '<option value=1>2</option>';
-      html += '<option value=1>3</option>';
-      html += '<option value=1>4</option>';
-      html += '<option value=1>5</option>';
-      html += '</select>';
-      html += '<input type="button" id="#ratingButton" value="Update"/>'
-
-      console.log("#subscribeDiv" + classID);
-      var divID = "#subscribeDiv" + classID;
-      console.log(divID);
-      console.log($(divID).html());
-
-      $("#subscriberDiv" + classID).html(html);
-
-      $(".modal").hide();
-
-      return "";
+      return html;
     }
     else if (sub_class.user == Meteor.user().username)
     {

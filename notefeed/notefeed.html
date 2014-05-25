@@ -86,7 +86,7 @@
 			<br/>
 		</div>
 
-	<div class="modal fade" id="class{{_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal fade" id="class{{_id}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" hidden>
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -96,9 +96,29 @@
 	      <div class="modal-body">
 	        current rating: {{rating}}
 	        <br/>
+
+	        {{#if isSubscriber}}
 	        <div id="subscribeDiv{{_id}}">
-	        	Hi
+	        	<br/>Rate this:
+	        	<select id="ratingSelect{{_id}}">
+	        		<option value=1>1</option>
+	        		<option value=2>2</option>
+	        		<option value=3>3</option>
+	        		<option value=4>4</option>
+	        		<option value=5>5</option>
+	        	</select>
+	        	<input class="ratingUpdate" type="button" value="Update" data-classID="{{_id}}"/>
 	        </div>
+	        {{/if}}
+
+	        {{#if isUploader}}
+	        <div id="uploaderDiv{{_id}}">
+	        	Upload a file: <input type="file" id="file{{_id}}">
+	        	<br/>
+	        	<input class="fileUpload" type="button" value="Upload" data-classID="{{_id}}"/>
+	        </div>
+	        {{/if}}
+
 	      </div>
 	      {{body}}
 	      <div class="modal-footer">
