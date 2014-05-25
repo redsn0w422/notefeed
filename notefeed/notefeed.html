@@ -144,10 +144,11 @@
 	        </div>
 
 	        {{else}}
-	        	  {{notes.[0]}}
-
 	        <div id="previewDiv{{_id}}">
-	        	<i>Preview</i>
+	        	<i>Preview:</i> <a href="/{{notes.[0]}}">{{notes.[0]}}</a>
+	        	<br/>
+	        	<br/>
+	        	All notes: (subscribe to view)
 	        	<br/>
 	        	{{#each notes}}
 	        	{{this}}
