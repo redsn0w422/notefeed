@@ -66,6 +66,29 @@ if (Meteor.isClient) {
     // $("#browseClassesDiv").hide();
     // $("#userProfile").hide();
     $(".modal").hide();
+
+    var newHTML = '';
+
+    for (var classy in classes.find())
+    {
+      newHTML = newHTML + '<div class="btn-group" id="browseClass_'+classy._id;
+      newHTML = newHTML +'"><button class="btn btn-default" type="button" data-toggle="modal" data-target="#'+classy._id+'">';
+      newHTML = newHTML +classy.name+' by '+classy.user+' (rating: '+classy.rating+')</button>';
+      newHTML = newHTML + '<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span class="caret">';
+      newHTML = newHTML + '</span><span class="sr-only"></span>';
+      newHTML = newHTML + '</button><ul class="dropdown-menu" role="menu"><li><a href="#" data-toggle="modal" data-target="#';
+      newHTML = newHTML +classy._id+'">View Class</a></li>';
+      newHTML = newHTML + '<li><a href="#" id="subscribeButton">Subscribe</a></li></ul><br/></div>';
+      newHTML = newHTML + '<div class="modal fade" id="'+classy._id+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">';
+      newHTML = newHTML + '<div class="modal-dialog"><div class="modal-content"><div class="modal-header">';
+      newHTML = newHTML + '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></div>';
+      newHTML = newHTML + '<div class="modal-body">this is class '+classy.name+'</div>';
+      newHTML = newHTML + '<div class="modal-footer">';
+      newHTML = newHTML + '<button type="button" class="btn btn-success" data-dismiss="modal" id="subscribeButton">Subscribe!</button>';
+      newHTML = newHTML + '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div>';
+    } 
+
+  $("#browseClassesTemplate").html(newHTML);
   });
 
   // Template.menubar.events({
