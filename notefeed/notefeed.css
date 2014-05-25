@@ -39,11 +39,9 @@ body {
 	left: 0px;
 }
 
-
-
 #footer {
     clear: both;
-    position: relative;
+    position: absolute;
     z-index: 10;
     height: 3em;
     margin-top: -3em;
