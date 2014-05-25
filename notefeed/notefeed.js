@@ -69,9 +69,16 @@ if (Meteor.isClient) {
     // $("#userProfile").hide();
     $(".modal").hide();
     var options = {
-    valueNames: [ 'name', 'rating' ]
+    valueNames: [ 'name', 'rating' ], item: '<li><h3 class="name"></h3><p class="rating"></p></li>'
     };
-  var classList = new List('classList', options);
+    var classesNew = [];
+    var index = 0;
+    for (var classy in classes.find())
+    {
+      classesNew[index] = {name:classy.name, rating:classy.rating};
+      index++;
+    }
+    var classList = new List('classList', options, classesNew);
   });
   // var newHTML = '';
 
