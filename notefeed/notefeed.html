@@ -3,26 +3,21 @@
 </head>
 <body>
 	<div id="content">
-	<div id="menubar2">
-		{{> menubar}}
+		<div id="menubar2">
+			{{> menubar}}
+		</div>
+		<div id="newClassForm">
+			{{> newClass}}	
+		</div>
+		<div id="browseClassesDiv">
+			{{> browseClasses}}
+		</div>
+		<div id="userProfile">
+			{{> userProfile}}
+		</div>
+		<div id="classPage"></div>
 	</div>
-
-	<div id="newClassForm">
-		{{> newClass}}	
-	</div>
-
-	<div id="browseClassesDiv">
-		{{> browseClasses}}
-	</div>
-
-	<div id="userProfile">
-		{{> userProfile}}
-	</div>
-
-	<div id="classPage">
-	</div>
-	</div>
-
+	<script src="http://listjs.com/no-cdn/list.js"></script>
 </body>
 
 <template name="classPage">
@@ -117,7 +112,6 @@
     				</ul>
     			{{/each}}
 		</div>
-		<script src="http://listjs.com/no-cdn/list.js"></script>
 </template>
 
 <template name="userProfile">
