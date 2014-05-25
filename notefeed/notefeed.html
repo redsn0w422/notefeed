@@ -79,8 +79,8 @@
 <template name="browseClasses">
 	{{#each classes}}
 		<div class="btn-group" id="browseClassInstance">
-			<button class="btn btn-default" type="button" data-toggle="modal" data-target="#class{{_id}}">{{name}} by {{user}} (rating: {{rating}})</button>
-			<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
+			<button class="btn {{btnType}}" type="button" data-toggle="modal" data-target="#class{{_id}}">{{name}} by {{user}} (rating: {{rating}})</button>
+			<button class="btn {{btnType}} dropdown-toggle" data-toggle="dropdown" type="button">
 				<span class="caret"></span>
     				<span class="sr-only"></span>
 			</button>

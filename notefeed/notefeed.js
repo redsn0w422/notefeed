@@ -179,6 +179,27 @@ if (Meteor.isClient) {
     return classes.find();
   };
 
+  Template.browseClasses.btnType = function() {
+    if (Meteor.user() == null)
+    {
+      return false;
+    }
+    var classID = this._id
+    var sub_class = classes.findOne({_id: classID});
+    if (Meteor.user().sub_classes.indexOf(classID) != -1)
+    {
+      return "btn-success";
+    }
+    else if (sub_class.user === Meteor.user().username)
+    {
+      return "btn-info";
+    }
+    else
+    {
+      return "btn-default";
+    }
+  };
+
   Template.browseClasses.isSubscriber = function () {
     if (Meteor.user() == null)
     {
