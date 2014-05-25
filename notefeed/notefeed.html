@@ -61,7 +61,10 @@
 	        	Keywords: <input type="text" name="keywords" placeholder="(ex. Chemistry, AP Course)" id="newClass_keywords"><br>
 	        	Start Date: <input type="text" name="start" placeholder="MM/DD/YY" id="newClass_startDate"><br>
 	        	End Date: <input type="text" name="end" placeholder="MM/DD/YY" id="newClass_endDate"><br>
-	        	Upload PDF: <input type="file" name="firstpdf" id="newClass_pdf"><br>
+	        	Upload PDF: 
+	        	<form enctype="multipart/form-data" action="/upload" method="post">
+    				<input id="pdf-file" type="file" />
+				</form>
 	        </form>
 	      </div>
 	      <div class="modal-footer">
