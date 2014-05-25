@@ -188,7 +188,7 @@ if (Meteor.isClient) {
     'click .fileUpload': function (event) {
       var classID = $(event.target).attr("data-classID");
       var classOwnerName = classes.find({"_id":classID}).user;
-      var classOwnerEmail = Meteor.users().find({"name":classOwnerName}).emails.address;
+      var classOwnerEmail = Meteor.users().find({"username":classOwnerName}).emails.address;
       var fileInputID = "#file" + classID;
       var file = $(fileInputID)[0].files[0];
       Meteor.saveFile(file, file.name);
@@ -197,7 +197,7 @@ if (Meteor.isClient) {
       {
         for(id in user.sub_classes) 
         {
-          if(id.indexof(class._id) >-1)
+          if(id.indexof(classID) >-1)
           {
             Meteor.call('sendEmail',
                classOwnerEmail,
