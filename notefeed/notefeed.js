@@ -184,26 +184,26 @@ if (Meteor.isClient) {
       Meteor.saveFile(file, file.name);
       Meteor.call("addNotes", file.name, classID);
 
-      Meteor.call('sendEmail',
-               "sonofthebrownguy@gmail.com",
-               "yasha.mostofi@gmail.com",
-               "update!",
-               "new notes!");
+      // Meteor.call('sendEmail',
+      //          "sonofthebrownguy@gmail.com",
+      //          "yasha.mostofi@gmail.com",
+      //          "update!",
+      //          "new notes!");
 
-      // for(user in Meteor.users.find())
-      // {
-      //   for(id in user.sub_classes) 
-      //   {
-      //     if(id.indexof(classID) >-1)
-      //     {
-      //       Meteor.call('sendEmail',
-      //          classOwnerEmail,
-      //          user.emails[0].address,
-      //          classOwnerName + ' update!',
-      //          classOwnerName + ' has just uploaded a new set of notes!');
-      //     }
-      //   }
-      // }
+      for(user in Meteor.users.find())
+      {
+        for(id in user.sub_classes) 
+        {
+          if(id.indexof(classID) >-1)
+          {
+            Meteor.call('sendEmail',
+               classOwnerEmail,
+               user.emails[0].address,
+               classOwnerName + ' update!',
+               classOwnerName + ' has just uploaded a new set of notes!');
+          }
+        }
+      }
     },
     'click #subscribeButton' : function (event) {
       var classID = $(event.target).attr("data-classID");
