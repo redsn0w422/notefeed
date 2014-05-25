@@ -17,16 +17,27 @@ Meteor.methods({
     var user = Meteor.users.findOne({'username': name});
     var subscriptionList = user.sub_classes;
     subscriptionList.push(classID);
-    Meteor.users.update({'username': name}, {$set: {'sub_classes': subscriptionList}});
+    var userRatings = user.ratings;
+    userRatings.push(0);
+    Meteor.users.update({'username': name}, {$set: {'sub_classes': subscriptionList, 'ratings': userRatings}});
   },
 
-  updateRating: function (newRating, classID) {
-    var ratingInt = parseInt(newRating);
+  updateRating: function (newRateString, classID, classIDIndex) {
+    var userRatings = Meteor.user().ratings;
+    var oldRating = parseInt(userRatings[classIDIndex]);
+    var firstRating = (oldRating === 0);
+    var newRating = parseInt(newRateString);
+    userRatings[classIDIndex] = newRating;
     var classObj = classes.findOne({_id: classID});
-    var ratingTotal = classObj.ratingTotal + ratingInt;
-    var numRatings = classObj.numRatings + 1;
+
+    var ratingTotal = classObj.ratingTotal - oldRating + newRating;
+    var numRatings = classObj.numRatings;
+    if (firstRating) {
+      numRatings = numRatings + 1;
+    }
     var rating = (ratingTotal + 0.0)/numRatings;
     rating = Math.round(rating*100)/100;
+    Meteor.users.update({_id: Meteor.user()._id}, {$set: {'ratings': userRatings}});
     classes.update({_id: classID}, {$set: {'ratingTotal': ratingTotal, 'numRatings': numRatings, 'rating': rating}});
   },
 
@@ -171,9 +182,10 @@ if (Meteor.isClient) {
   Template.browseClasses.events({
     'click .ratingUpdate': function (event) {
       var classID = $(event.target).attr("data-classID");
+      var classIDIndex = Meteor.user().sub_classes.indexOf(classID);
       var selectID = "#ratingSelect" + classID;
       var rating = $(selectID).val();
-      Meteor.call("updateRating", rating, classID);
+      Meteor.call("updateRating", rating, classID, classIDIndex);
     },
     'click .fileUpload': function (event) {
       var classID = $(event.target).attr("data-classID");
@@ -212,6 +224,18 @@ if (Meteor.isClient) {
       Meteor.call("addSubscription", Meteor.user().username, classID);
     }
   });
+
+    Template.browseClasses.rating = function () {
+      if (this.rating == null)
+      {
+        return "none yet";
+      }
+      else
+      {
+        return this.rating;
+      }
+
+    };
 
     Template.browseClasses.classes = function () {
     console.log("classes updated");
@@ -352,6 +376,7 @@ if (Meteor.isServer) {
 
   Accounts.onCreateUser(function(options, user) {
     user.sub_classes = [];
+    user.ratings = [];
     user.compositeRating = 0;
     return user;
   });
