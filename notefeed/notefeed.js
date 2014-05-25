@@ -143,7 +143,7 @@ if (Meteor.isClient) {
     return classes.find();
   };
 
-  Temlate.browseClasses.body = function (event) {
+  Template.browseClasses.body = function (event) {
     var classID = $(event.target).attr("data-classID");
     if (Meteor.user().sub_classes.indexOf(classID) != -1)
     {
