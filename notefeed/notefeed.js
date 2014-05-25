@@ -238,13 +238,14 @@ if (Meteor.isClient) {
         break;
       default:
         var query = $("#searchBar").val();
+        query = query.toLowerCase();
         var classes_found = [];
         var index = 0;
         var cursor = classes.find();
         cursor.forEach(function (doc) {
           console.log(doc);
           console.log(doc.name);
-          if (doc.name.indexOf(query) > -1)
+          if (doc.name.toLowerCase().indexOf(query) > -1)
           {
             console.log("yay");
             classes_found.push( doc._id);
