@@ -54,6 +54,8 @@ if (Meteor.isClient) {
         }
 
         $("#browseClassesTemplate").html(newHTML);
+        $("#browseClassesDiv").html("{{> browseClasses}}");
+
      }
     });
   });
@@ -89,6 +91,7 @@ if (Meteor.isClient) {
     } 
 
   $("#browseClassesTemplate").html(newHTML);
+  $("#browseClassesDiv").html("{{> browseClasses}}");
   });
 
   // Template.menubar.events({
