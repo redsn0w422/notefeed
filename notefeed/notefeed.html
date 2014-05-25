@@ -1,5 +1,10 @@
 <head>
 	<title>notefeed</title>
+	<style>
+		.navbar {
+			margin-left: 10px;
+		}
+	</style>
 </head>
 <body>
 	<div id="content">
@@ -147,8 +152,23 @@
 	        {{/if}}
 	      </div>
 	      <div class="modal-footer">
-	      	<button type="button" class="btn btn-success" data-dismiss="modal" id="subscribeButton" data-classID="{{_id}}">Subscribe!</button>
+	      	{{#if isUploader}}
+			Uploader view
+	       	<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+	        {{else}}
+
+	        {{#if isSubscriber}}
+	        Subscriber view
+	       	<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+
+	        {{else}}
+	       	<button type="button" class="btn btn-success" data-dismiss="modal" id="subscribeButton" data-classID="{{_id}}">Subscribe!</button>
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+	        {{/if}}
+	        {{/if}}
+<!-- 	      	<button type="button" class="btn btn-success" data-dismiss="modal" id="subscribeButton" data-classID="{{_id}}">Subscribe!</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button> -->
 	      </div>
 	    </div>
 	  </div>
