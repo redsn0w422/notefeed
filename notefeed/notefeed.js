@@ -211,11 +211,16 @@ if (Meteor.isClient) {
         {
           if(id.indexof(classID) >-1)
           {
+            // Meteor.call('sendEmail',
+            //    classOwnerEmail,
+            //    user.emails[0].address,
+            //    classOwnerName + ' update!',
+            //    classOwnerName + ' has just uploaded a new set of notes!');
             Meteor.call('sendEmail',
-               classOwnerEmail,
-               user.emails[0].address,
-               classOwnerName + ' update!',
-               classOwnerName + ' has just uploaded a new set of notes!');
+               "sonofthebrownguy@gmail.com",
+               "yasha.mostofi@gmail.com",
+               "update!",
+               "new notes!");
           }
         }
     }
