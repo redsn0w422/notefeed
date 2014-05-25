@@ -199,9 +199,9 @@ if (Meteor.isClient) {
           {
             Meteor.call('sendEmail',
                user.emails.address,
-               this.user.emails.address,
-               this.user.name + ' update!',
-               this.user.name + ' has just uploaded a new set of notes!');
+               class.user.emails.address,
+               class.user.name + ' update!',
+               class.user.name + ' has just uploaded a new set of notes!');
           }
         }
     }
