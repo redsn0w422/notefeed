@@ -190,7 +190,7 @@ var userList = new List('users', options, values);
   // Template.classPage.
 }
 
-if (Meteor.isServer) {
+if(Meteor.isServer) {
   Meteor.startup(function () {
     // code to run on server at startup
     
