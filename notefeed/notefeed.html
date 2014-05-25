@@ -81,13 +81,13 @@
 <template name="browseClasses">
 	{{#each classes}}
 		<div class="btn-group">
-			<button class="btn btn-default" type="button">{{name}} by {{user}} (rating: {{rating}})</button>
+			<button class="btn btn-default" type="button" data-toggle="modal" data-target="#viewClassModal">{{name}} by {{user}} (rating: {{rating}})</button>
 			<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button">
 				<span class="caret"></span>
     				<span class="sr-only"></span>
 			</button>
 			<ul class="dropdown-menu" role="menu">
-				<li><a href="#viewClassModal">Open Class</a></li>
+				<li><a href="#" data-toggle="modal" data-target="#viewClassModal">View Class</a></li>
     				<li><a href="#">Subscribe</a></li>
   			</ul>
 			<br/>
