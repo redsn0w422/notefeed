@@ -42,6 +42,22 @@ if (Meteor.isClient) {
   Accounts.ui.config({
     passwordSignupFields: 'USERNAME_AND_EMAIL'
   });
+  Template.hello.events({
+    'click input' : function () {    
+      for(users in Meteor.users.find())
+      {
+        for(id in user.sub_classes) 
+        {
+          if(id.indexof(this._id) >-1)
+          {
+            Meteor.call('sendEmail',
+               this.user.emails.address,
+                users.emails.address,
+                this.user.name + 'Has just uploaded a new set of notes!'); 
+          }
+        }
+    }
+  });
 
   // Accounts.config({
   //   sendVerificationEmail: 'true'
