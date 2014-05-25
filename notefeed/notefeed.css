@@ -39,6 +39,14 @@
 	left: 0px;
 }
 
+#footer{
+	margin-top: 20px;
+	text-align: center;
+	width: 100px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 /*#footer {
     clear: both;
     position: ;
