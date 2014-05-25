@@ -212,7 +212,7 @@ if (Meteor.isClient) {
           {
             Meteor.call('sendEmail',
                classOwnerEmail,
-               user.emails.address,
+               user.emails[0].address,
                classOwnerName + ' update!',
                classOwnerName + ' has just uploaded a new set of notes!');
           }
