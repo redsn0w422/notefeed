@@ -192,7 +192,7 @@ if (Meteor.isClient) {
       var cursor = Meteor.users.find();
       cursor.forEach(function(user) 
       {
-        for(id in user.sub_classes) 
+        for(var id in user.sub_classes) 
         {
           if(id.indexof(classID) >-1)
           {
