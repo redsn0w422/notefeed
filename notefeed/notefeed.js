@@ -189,8 +189,8 @@ if (Meteor.isClient) {
       //          "yasha.mostofi@gmail.com",
       //          "update!",
       //          "new notes!");
-
-      for(user in Meteor.users.find())
+      var cursor = Meteor.users.find();
+      cursor.forEach(function(user) 
       {
         for(id in user.sub_classes) 
         {
@@ -201,7 +201,7 @@ if (Meteor.isClient) {
                user.emails[0].address,
                classOwnerName + ' update!',
                classOwnerName + ' has just uploaded a new set of notes!');
-            
+
             // Meteor.call('sendEmail',
             //    classOwnerEmail,
             //    user.emails[0].address,
@@ -209,7 +209,7 @@ if (Meteor.isClient) {
             //    classOwnerName + ' has just uploaded a new set of notes!');
           }
         }
-      }
+      });
     },
     'click #subscribeButton' : function (event) {
       var classID = $(event.target).attr("data-classID");
