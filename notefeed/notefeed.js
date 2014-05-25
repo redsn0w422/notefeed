@@ -34,7 +34,7 @@ if (Meteor.isClient) {
       added: function(item) {
         var newHTML = '';
 
-        for classy in classes.find()
+        for (var classy in classes.find())
         {
           newHTML += '<div class="btn-group" id="browseClass_'+classy._id+'">
       <button class="btn btn-default" type="button" data-toggle="modal" data-target="#'+classy._id+'">'+classy.name+' by '+classy.user+' (rating: '+classy.rating+')</button>
