@@ -102,7 +102,7 @@
 	        <br/>
 
 			{{#if isUploader}}
-			Uploader view
+			<i>Uploader view</i>
 	        <div id="uploaderDiv{{_id}}">
 	        	{{#each notes}}
 	        	<a href="/{{this}}">{{this}}</a>
@@ -117,7 +117,7 @@
 	        {{else}}
 
 	        {{#if isSubscriber}}
-	        Subscriber view
+	        <i>Subscriber view</i>
 	        <div id="subscribeDiv{{_id}}">
 	        	{{#each notes}}
 	        	<a href="/{{this}}">{{this}}</a>
@@ -138,7 +138,7 @@
 
 	        {{else}}
 	        <div id="previewDiv{{_id}}">
-	        	Preview
+	        	<i>Preview</i>
 	        	<br/>
 	        	{{#each notes}}
 	        	{{this}}
@@ -153,12 +153,10 @@
 	      </div>
 	      <div class="modal-footer">
 	      	{{#if isUploader}}
-			Uploader view
 	       	<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
 	        {{else}}
 
 	        {{#if isSubscriber}}
-	        Subscriber view
 	       	<button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
 
 	        {{else}}
