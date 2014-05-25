@@ -195,21 +195,14 @@ if (Meteor.isClient) {
         for(var i=0; i<user.sub_classes.length; i++) 
         {
           var id = user.sub_classes[i];
-          console.log(id);
-          console.log(id ===classID);
+
           if(id === classID)
           {
-            console.log('sendEmail',
+              Meteor.call('sendEmail',
+                user.emails[0].address,
                classOwnerEmail,
-               user.emails[0].address,
                classOwnerName + ' update!',
                classOwnerName + ' has just uploaded a new set of notes!');
-
-            // Meteor.call('sendEmail',
-            //    classOwnerEmail,
-            //    user.emails[0].address,
-            //    classOwnerName + ' update!',
-            //    classOwnerName + ' has just uploaded a new set of notes!');
           }
         }
       });
