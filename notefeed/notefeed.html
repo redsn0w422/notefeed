@@ -82,7 +82,7 @@
 			</button>
 			<ul class="dropdown-menu" role="menu">
 				<li><a href="#" data-toggle="modal" data-target="#class{{_id}}">View Class</a></li>
-    				<li><a href="#" id="subscribeButton">Subscribe</a></li>
+    				<li><a href="#" id="subscribeButton" data-classID="{{_id}}">Subscribe</a></li>
   			</ul>
 			<br/>
 		</div>
@@ -98,7 +98,7 @@
 	        {{_id}}
 	      </div>
 	      <div class="modal-footer">
-	      	<button type="button" class="btn btn-success" data-dismiss="modal" id="subscribeButton">Subscribe!</button>
+	      	<button type="button" class="btn btn-success" data-dismiss="modal" id="subscribeButton" data-classID="{{_id}}">Subscribe!</button>
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	      </div>
 	    </div>
