@@ -1,9 +1,9 @@
 /* CSS declarations go here */
-body {
+/*body {
 	background-image: url('background.jpg');
   	background-position: center;
   	background-repeat: repeat-y;
-}
+}*/
 
 #headerText {
 	text-align: center;
@@ -41,7 +41,7 @@ body {
 
 #footer {
     clear: both;
-    position: absolute;
+    position: ;
     z-index: 10;
     height: 3em;
     margin-top: -3em;
