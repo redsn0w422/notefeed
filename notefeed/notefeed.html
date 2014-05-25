@@ -81,29 +81,30 @@
     				<span class="sr-only"></span>
 			</button>
 			<ul class="dropdown-menu" role="menu">
-				<li><a href="#" data-toggle="modal" data-target="#viewClassModal">View Class</a></li>
-    				<li><a href="#">Subscribe</a></li>
+				<li><a href="#" data-toggle="modal" data-target="#"+{{_id}}>View Class</a></li>
+    				<li><a href="#" id="subscribeButton">Subscribe</a></li>
   			</ul>
 			<br/>
 		</div>
+
+		<div class="modal fade" id={{_id}} tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		      </div>
+		      <div class="modal-body">
+		        subscribe to this class
+		        this is where pdfs go
+		      </div>
+		      <div class="modal-footer">
+		      	<button type="button" class="btn btn-success" data-dismiss="modal" id="subscribeButton">Subscribe!</button>
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
 		
 	{{/each}}
-	
-	<div class="modal fade" id="viewClassModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-	  <div class="modal-dialog">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	      </div>
-	      <div class="modal-body">
-	        subscribe to this class
-	        this is where pdfs go
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-	      </div>
-	    </div>
-	  </div>
 	</div>
 </template>
 
