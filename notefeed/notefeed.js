@@ -16,6 +16,9 @@ Meteor.methods({
   addSubscription: function (name, classID) {
     var user = Meteor.users.findOne({'username': name});
     var subscriptionList = user.sub_classes;
+    subscriptionList.push(classID);
+    Meteor.users.update({'username': name}, {$set: {'sub_classes': subscriptionList}});
+    console.log("hiii");
 
   }
 });
@@ -135,7 +138,7 @@ if (Meteor.isClient) {
     'click #subscribeButton' : function (event) {
       var classID = $(event.target).attr("data-classID");
       console.log(classID);
-      Meteor.call("addSubscription", Meteor.user().username);
+      Meteor.call("addSubscription", Meteor.user().username, classID);
     }
   });
 
