@@ -16,7 +16,8 @@ Meteor.methods({
   addSubscription: function (name, classID) {
     var user = Meteor.users.findOne({'username': name});
     var subscriptionList = user.sub_classes;
-
+    subscriptionList.push(classID);
+    Meteor.users.update({'username': name}, {$set: {'sub_classes': subscriptionList}});
   }
 });
 
@@ -29,36 +30,36 @@ if (Meteor.isClient) {
   //   sendVerificationEmail: 'true'
   // });
 
-  Meteor.autosubscribe(function() {
-    classes.find().observe({
-      added: function(item) {
-        var newHTML = '';
+  // Meteor.autosubscribe(function() {
+  //   classes.find().observe({
+  //     added: function(item) {
+  //       var newHTML = '';
 
-        for (var classy in classes.find())
-        {
-          newHTML = newHTML + '<div class="btn-group" id="browseClass_'+classy._id;
-          newHTML = newHTML +'"><button class="btn btn-default" type="button" data-toggle="modal" data-target="#'+classy._id+'">';
-          newHTML = newHTML +classy.name+' by '+classy.user+' (rating: '+classy.rating+')</button>';
-          newHTML = newHTML + '<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span class="caret">';
-          newHTML = newHTML + '</span><span class="sr-only"></span>';
-          newHTML = newHTML + '</button><ul class="dropdown-menu" role="menu"><li><a href="#" data-toggle="modal" data-target="#';
-          newHTML = newHTML +classy._id+'">View Class</a></li>';
-          newHTML = newHTML + '<li><a href="#" id="subscribeButton">Subscribe</a></li></ul><br/></div>';
-          newHTML = newHTML + '<div class="modal fade" id="'+classy._id+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">';
-          newHTML = newHTML + '<div class="modal-dialog"><div class="modal-content"><div class="modal-header">';
-          newHTML = newHTML + '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></div>';
-          newHTML = newHTML + '<div class="modal-body">this is class '+classy.name+'</div>';
-          newHTML = newHTML + '<div class="modal-footer">';
-          newHTML = newHTML + '<button type="button" class="btn btn-success" data-dismiss="modal" id="subscribeButton">Subscribe!</button>';
-          newHTML = newHTML + '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div>';
-        }
+  //       for (var classy in classes.find())
+  //       {
+  //         newHTML = newHTML + '<div class="btn-group" id="browseClass_'+classy._id;
+  //         newHTML = newHTML +'"><button class="btn btn-default" type="button" data-toggle="modal" data-target="#'+classy._id+'">';
+  //         newHTML = newHTML +classy.name+' by '+classy.user+' (rating: '+classy.rating+')</button>';
+  //         newHTML = newHTML + '<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span class="caret">';
+  //         newHTML = newHTML + '</span><span class="sr-only"></span>';
+  //         newHTML = newHTML + '</button><ul class="dropdown-menu" role="menu"><li><a href="#" data-toggle="modal" data-target="#';
+  //         newHTML = newHTML +classy._id+'">View Class</a></li>';
+  //         newHTML = newHTML + '<li><a href="#" id="subscribeButton">Subscribe</a></li></ul><br/></div>';
+  //         newHTML = newHTML + '<div class="modal fade" id="'+classy._id+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">';
+  //         newHTML = newHTML + '<div class="modal-dialog"><div class="modal-content"><div class="modal-header">';
+  //         newHTML = newHTML + '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></div>';
+  //         newHTML = newHTML + '<div class="modal-body">this is class '+classy.name+'</div>';
+  //         newHTML = newHTML + '<div class="modal-footer">';
+  //         newHTML = newHTML + '<button type="button" class="btn btn-success" data-dismiss="modal" id="subscribeButton">Subscribe!</button>';
+  //         newHTML = newHTML + '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div>';
+  //       }
 
-        $("#browseClassesTemplate").html(newHTML);
-        $("#browseClassesDiv").html("{{> browseClasses}}");
+  //       $("#browseClassesTemplate").html(newHTML);
+  //       $("#browseClassesDiv").html("{{> browseClasses}}");
 
-     }
-    });
-  });
+  //    }
+  //   });
+  // });
 
   Meteor.subscribe('userData');
   Meteor.subscribe('classes');
@@ -68,31 +69,31 @@ if (Meteor.isClient) {
     // $("#browseClassesDiv").hide();
     // $("#userProfile").hide();
     $(".modal").hide();
-
-    var newHTML = '';
-
-    for (var classy in classes.find())
-    {
-      newHTML = newHTML + '<div class="btn-group" id="browseClass_'+classy._id;
-      newHTML = newHTML +'"><button class="btn btn-default" type="button" data-toggle="modal" data-target="#'+classy._id+'">';
-      newHTML = newHTML +classy.name+' by '+classy.user+' (rating: '+classy.rating+')</button>';
-      newHTML = newHTML + '<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span class="caret">';
-      newHTML = newHTML + '</span><span class="sr-only"></span>';
-      newHTML = newHTML + '</button><ul class="dropdown-menu" role="menu"><li><a href="#" data-toggle="modal" data-target="#';
-      newHTML = newHTML +classy._id+'">View Class</a></li>';
-      newHTML = newHTML + '<li><a href="#" id="subscribeButton">Subscribe</a></li></ul><br/></div>';
-      newHTML = newHTML + '<div class="modal fade" id="'+classy._id+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">';
-      newHTML = newHTML + '<div class="modal-dialog"><div class="modal-content"><div class="modal-header">';
-      newHTML = newHTML + '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></div>';
-      newHTML = newHTML + '<div class="modal-body">this is class '+classy.name+'</div>';
-      newHTML = newHTML + '<div class="modal-footer">';
-      newHTML = newHTML + '<button type="button" class="btn btn-success" data-dismiss="modal" id="subscribeButton">Subscribe!</button>';
-      newHTML = newHTML + '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div>';
-    } 
-
-  $("#browseClassesTemplate").html(newHTML);
-  $("#browseClassesDiv").html("{{> browseClasses}}");
   });
+  //   var newHTML = '';
+
+  //   for (var classy in classes.find())
+  //   {
+  //     newHTML = newHTML + '<div class="btn-group" id="browseClass_'+classy._id;
+  //     newHTML = newHTML +'"><button class="btn btn-default" type="button" data-toggle="modal" data-target="#'+classy._id+'">';
+  //     newHTML = newHTML +classy.name+' by '+classy.user+' (rating: '+classy.rating+')</button>';
+  //     newHTML = newHTML + '<button class="btn btn-default dropdown-toggle" data-toggle="dropdown" type="button"><span class="caret">';
+  //     newHTML = newHTML + '</span><span class="sr-only"></span>';
+  //     newHTML = newHTML + '</button><ul class="dropdown-menu" role="menu"><li><a href="#" data-toggle="modal" data-target="#';
+  //     newHTML = newHTML +classy._id+'">View Class</a></li>';
+  //     newHTML = newHTML + '<li><a href="#" id="subscribeButton">Subscribe</a></li></ul><br/></div>';
+  //     newHTML = newHTML + '<div class="modal fade" id="'+classy._id+'" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">';
+  //     newHTML = newHTML + '<div class="modal-dialog"><div class="modal-content"><div class="modal-header">';
+  //     newHTML = newHTML + '<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button></div>';
+  //     newHTML = newHTML + '<div class="modal-body">this is class '+classy.name+'</div>';
+  //     newHTML = newHTML + '<div class="modal-footer">';
+  //     newHTML = newHTML + '<button type="button" class="btn btn-success" data-dismiss="modal" id="subscribeButton">Subscribe!</button>';
+  //     newHTML = newHTML + '<button type="button" class="btn btn-default" data-dismiss="modal">Close</button></div></div></div>';
+  //   } 
+
+  // $("#browseClassesTemplate").html(newHTML);
+  // $("#browseClassesDiv").html("{{> browseClasses}}");
+  // });
 
   // Template.menubar.events({
   //   'click #newClass' : function () {
@@ -132,13 +133,27 @@ if (Meteor.isClient) {
   });
 
   Template.browseClasses.events({
-    'click #subscribeButton' : function () {
-      Meteor.call("addSubscription", Meteor.user().username);
+    'click #subscribeButton' : function (event) {
+      var classID = $(event.target).attr("data-classID");
+      Meteor.call("addSubscription", Meteor.user().username, classID);
     }
   });
 
   Template.browseClasses.classes = function () {
     return classes.find();
+  };
+
+  Template.browseClasses.body = function (event) {
+    var classID = $(event.target).attr("data-classID");
+    if (Meteor.user().sub_classes.indexOf(classID) != -1)
+    {
+      // user is subscribed to this class
+      return "yes";
+    }
+    else
+    {
+      return "no";
+    }
   };
 
   Template.userProfile.user = function () { 
