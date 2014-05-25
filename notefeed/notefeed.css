@@ -40,7 +40,11 @@ body {
 }
 
 #footer {
-	bottom: ;
+    clear: both;
+    position: relative;
+    z-index: 10;
+    height: 3em;
+    margin-top: -3em;
 }
 
 /*#loginButtons_nav {
