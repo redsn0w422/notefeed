@@ -69,7 +69,7 @@ if (Meteor.isClient) {
     // $("#userProfile").hide();
     $(".modal").hide();
     var options = {
-    valueNames: [ 'dateUL', 'rating' ]
+    valueNames: [ 'name', 'rating' ]
     };
   var classList = new List('classList', options);
   });
