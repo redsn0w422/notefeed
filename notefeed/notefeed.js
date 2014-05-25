@@ -194,7 +194,8 @@ if (Meteor.isClient) {
       {
         for(var id in user.sub_classes) 
         {
-          if(id.indexOf(classID) > -1)
+          console.log(id.indexOf(classID));
+          if(id.indexOf(classID) != -1)
           {
             console.log('sendEmail',
                classOwnerEmail,
